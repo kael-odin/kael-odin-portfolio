@@ -10,7 +10,8 @@ export default {
         "primarytext":"#ffffe3",
         "bgreen":"#0fe149",
         "accentv":"#a076fe",
-        "bline":"#444c44"
+        "bline":"#444c44",
+        "diffblue":"#17f0d1"
       }
     },
   },

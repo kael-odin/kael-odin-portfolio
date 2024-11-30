@@ -3,6 +3,7 @@ import './App.css'
 import Navbar from './components/Navbar'
 import {Hero} from './components/Hero'
 import Aboutme from './components/Aboutme'
+import Projects from './components/projects'
 
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
       <Navbar/>
       <Hero/>
       <Aboutme/>
-    {/* <SocialIcons/> */}
+      <Projects/>
     </>
   )
 }

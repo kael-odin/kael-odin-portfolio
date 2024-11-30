@@ -125,7 +125,7 @@ const Hero = () => {
   });
 
   return (
-    <main className="min-h-[85vh] flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 font-['Hanken_Grotesk'] py-8">
+    <main className="min-h-[85vh] flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 font-['Hanken_Grotesk'] py-8 overflow-hidden">
       <div className="flex flex-col items-center gap-1 max-w-6xl w-full">
         <div className="flex items-center gap-2 sm:gap-4">
           <div className="bg-white rounded-full w-8 h-8 sm:w-12 sm:h-12 lg:w-20 lg:h-20 overflow-hidden">
