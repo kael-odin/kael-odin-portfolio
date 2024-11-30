@@ -8,7 +8,9 @@ export default {
     extend: {
       colors:{
         "primarytext":"#ffffe3",
-        "bgreen":"#0fe149"
+        "bgreen":"#0fe149",
+        "accentv":"#a076fe",
+        "bline":"#444c44"
       }
     },
   },

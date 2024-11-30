@@ -2,12 +2,15 @@ import { useRef, useState, useEffect } from "react";
 import Social from "./Social";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ArrowUpRight, Ghost , Brain, Computer, Brush } from 'lucide-react';
 
 const MagneticButton = ({ children, className }) => {
+  // Previous button logic remains the same
   const buttonRef = useRef(null);
   const circleRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false);
   
+  // Existing useEffect and handlers remain the same
   useEffect(() => {
     const button = buttonRef.current;
     if (!button) return;
@@ -70,15 +73,13 @@ const MagneticButton = ({ children, className }) => {
     gsap.fromTo(circleRef.current, 
       {
         y: 0,
-        opacity: 0,
         scale: 1
       },
       {
         y: -100,
-        opacity: 1,
         scale: 1.5,
         duration: 0.4,
-        ease: "power2.out"
+        ease: "slow(0.7,0.7,false)"
       }
     );
   };
@@ -106,7 +107,7 @@ const MagneticButton = ({ children, className }) => {
         bg-black/20 hover:bg-gray-800/20 
         transition-colors duration-300
         flex items-center font-medium gap-1 sm:gap-2 
-        text-base sm:text-lg text-primarytext
+        text-sm sm:text-base md:text-lg text-primarytext
         z-10 overflow-hidden 
         cursor-pointer
         select-none
@@ -129,12 +130,33 @@ const MagneticButton = ({ children, className }) => {
 const AboutMe = () => {
   const pathRef = useRef();
   const containerRef = useRef();
+  const mywork = [
+    {
+      title: "Machine Learning",
+      Icon: Brain,
+      color: "text-blue-500", // Using Tailwind's built-in colors
+      description: "Developing and implementing machine learning models and algorithms for data analysis, pattern recognition, and predictive modeling."
+    },
+    {
+      title: "Full Stack Development",
+      Icon: Computer,
+      color: "text-purple-500",
+      description: "I make awesome web apps using MERN stack which are Robust and Reliable"
+    },
+    {
+      title: "Desginer",
+      Icon: Brush,
+      color: "text-cyan-400",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem alias in minus deleniti commodi sequi, consequatur quam quaerat saepe quasi perspiciatis ducimus nemo doloribus nisi dolore. Officia quam placeat quae!"
+    }
+  ];
   
   const INITIAL_PATH = "M 0 50 Q 250 50 1280 50";
   const viewBoxWidth = 1280;
   const viewBoxHeight = 100;
 
   useGSAP(() => {
+    // Previous GSAP logic remains the same
     const container = containerRef.current;
     if (!container) return;
 
@@ -193,32 +215,39 @@ const AboutMe = () => {
   }, []);
 
   return (
-    <section className="min-h-screen bg-background relative">
+    <section className="min-h-screen bg-background relative overflow-x-hidden">
       <Social />
-      <div className="container mx-auto px-4 py-8 md:py-16">
-        <div className="flex flex-col gap-8 md:flex-row sm:items-end md:items-start md:justify-between">
-          <div className="max-w-3xl">
-            <h1 className="text-xl font-light text-primarytext sm:text-2xl md:text-3xl lg:text-4xl">
+      
+      {/* Hero Section */}
+      <div className="container mx-auto px-4 py-4 sm:py-8 md:py-16">
+        <div className="flex flex-col gap-4 sm:gap-8 md:flex-row md:items-start md:justify-between">
+          <div className="w-full md:max-w-3xl">
+            <h1 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-light text-primarytext leading-relaxed">
               Empowering success in the digital landscape. Together, we shape a visionary future, delivering on promises and continuously pioneering innovation.
             </h1>
           </div>
           
-          <div className="md:max-w-xs">
-            <p className="max-w-xs text-lg text-primarytext sm:pl-10">
+          <div className="w-full md:w-auto md:max-w-xs">
+            <p className="text-base sm:text-lg text-primarytext md:pl-10">
               My blend of design, coding, and interaction expertise distinguishes me within the tech industry.
             </p>
           </div>
         </div>
         
-        <div className="text-primarytext sm:text-2xl">
-          <h2 className="pb-0 mt-8 text-2xl font-semibold text-bgreen sm:text-3xl md:text-4xl sm:pt-3">
+        {/* Title and Ghost Icon */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end text-primarytext mt-8 sm:mt-12">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-bgreen leading-tight">
             Coding the Future<br />
             Architecting Innovation
           </h2>
+          <div className="hidden sm:flex justify-center bg-white rounded-full p-2 sm:p-4 items-center sm:-translate-y-2">
+            <Ghost size={32} className="sm:w-10 sm:h-10 md:w-12 md:h-12" stroke="black" />
+          </div>
         </div>
       </div>
 
-      <div className="relative w-full">
+      {/* Interactive Line and Bottom Content */}
+      <div className="relative w-full mt-8 sm:-translate-y-24">
         <div 
           ref={containerRef}
           className="relative mx-auto touch-none"
@@ -235,31 +264,56 @@ const AboutMe = () => {
             <path 
               ref={pathRef}
               d={INITIAL_PATH}
-              className="stroke-primarytext"
+              className="stroke-[#444c44]"
               strokeWidth="1"
               fill="transparent"
             />
           </svg>
         </div>
 
-        <div className="container mx-auto px-4 mt-16 sm:mt-24">
-          <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
-            <div className="max-w-lg">
-              <p className="text-lg font-light text-primarytext sm:text-2xl">
-              I specialize in engineering bespoke solutions, consistently pushing the limits in each project, with an unwavering dedication to prioritizing excellence.
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-start gap-8">
+            <div className="w-full md:max-w-lg">
+              <p className="text-base sm:text-lg md:text-xl font-light text-primarytext">
+                I specialize in engineering bespoke solutions, consistently pushing the limits in each project, with an unwavering dedication to prioritizing excellence.
               </p>
             </div>
           </div>
 
-          <div className="flex">
-            <div className="flex-grow"></div>
-            <MagneticButton className={"items-end"}>
-              About Me
-              
+          <div className="flex justify-end mt-7">
+            <MagneticButton>
+              About Me 
+              <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5"/>
             </MagneticButton>
           </div>
         </div>
       </div>
+      <main className="flex flex-col items-center justify-center w-full m-auto max-w-7xl">
+        <div className='flex-grow'></div>
+      <div className="w-full text-center">
+        <h1 className="text-xl text-purple-500 font-semibold sm:text-2xl md:text-3xl sm:pb-10">
+          WHAT I DO
+        </h1>
+      </div>
+
+      <div className="flex flex-row flex-wrap w-11/12 gap-4 pt-3">
+        {mywork.map((work, index) => (
+          <div key={index} className="flex-grow w-64 min-w-64">
+            <div className="h-full pt-8 pb-8 px-6 border rounded-lg bg-[#191917] border-bline hover:shadow-lg transition-all duration-300">
+              <div className={`${work.color} mb-4`}>
+                <work.Icon className="w-8 h-8 mb-3" />
+                <h2 className="text-lg font-semibold">
+                  {work.title}
+                </h2>
+              </div>
+              <p className="text-primarytext leading-relaxed">
+                {work.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </main>
     </section>
   );
 };
