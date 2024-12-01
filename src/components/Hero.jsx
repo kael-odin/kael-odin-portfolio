@@ -185,7 +185,7 @@ const Hero = () => {
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-teal-400 tracking-tight"><span className='text-primarytext'>&amp;</span> DESIGNER.</h2>
         </div>
       </div>
-      <p className='text-center text-3xl '> 
+      <p className='text-center text-lg sm:text-3xl'> 
         I create a digital Apps that borders on <br className="sm:hidden"/><span className='bg-gradient-to-r from-purple-400 to-purple-600 text-transparent bg-clip-text tracking-tight'>Efficiency</span>, <span className='text-teal-400'>Aesthetics</span> and <span className='text-yellow-400'>Functionality</span>.
       </p>
     </main>
