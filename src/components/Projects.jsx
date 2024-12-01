@@ -1,6 +1,10 @@
-import { useRef } from 'react';
+
 import { Presentation } from 'lucide-react';
 import gsap from 'gsap';
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+ 
 
 function Projects() {
     const projects = [
@@ -50,7 +54,7 @@ function Projects() {
             
             </div>
 
-            <div className="relative w-full flex flex-col space-y-5">
+            <div className="relative w-full flex flex-col space-y-5 hidden sm:block">
                 {projects.map((project, index) => (
                     <div 
                         key={index}

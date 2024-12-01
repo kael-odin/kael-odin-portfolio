@@ -3,6 +3,9 @@ import Social from "./Social";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ArrowUpRight, Ghost , Brain, Computer, Brush } from 'lucide-react';
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger)
 
 const MagneticButton = ({ children, className }) => {
   // Previous button logic remains the same
@@ -130,6 +133,7 @@ const MagneticButton = ({ children, className }) => {
 const AboutMe = () => {
   const pathRef = useRef();
   const containerRef = useRef();
+  const workRef = useRef(null)
   const mywork = [
     {
       title: "Machine Learning",
@@ -159,12 +163,33 @@ const AboutMe = () => {
     // Previous GSAP logic remains the same
     const container = containerRef.current;
     if (!container) return;
+    ScrollTrigger.create({
+      trigger: workRef.current,
+      start: 'top center',
+      end: 'bottom center',
+      once:true,
+      onEnter: () => {
+        gsap.to(workRef.current, {
+          opacity: 1,
+          duration: 0.1,
+          ease: 'none',
+        });
+        gsap.from(workRef.current.children, {
+          y: 50,
+          opacity: 0,
+          stagger: 0.2,
+          duration: 0.8,
+          ease: 'power2.out',
+        });
+      }
+    });
 
     const updatePath = (x, y) => {
       const rect = container.getBoundingClientRect();
       const scaledX = (x / rect.width) * viewBoxWidth;
       const scaledY = (y / rect.height) * viewBoxHeight;
       const newPath = `M 0 50 Q ${scaledX} ${scaledY} ${viewBoxWidth} 50`;
+      
       
       gsap.to(pathRef.current, {
         attr: { d: newPath },
@@ -215,7 +240,7 @@ const AboutMe = () => {
   }, []);
 
   return (
-    <section className="min-h-screen bg-background relative overflow-x-hidden">
+    <section className="min-h-screen bg-background relative overflow-hidden">
       <Social />
       
       {/* Hero Section */}
@@ -296,7 +321,7 @@ const AboutMe = () => {
         </h1>
       </div>
 
-      <div className="flex flex-row flex-wrap w-11/12 gap-4 pt-3">
+      <div className="flex flex-row flex-wrap w-11/12 gap-4 pt-3 opacity-0" ref={workRef}>
         {mywork.map((work, index) => (
           <div key={index} className="flex-grow w-64 min-w-64">
             <div className="h-full pt-8 pb-8 px-6 border rounded-lg bg-[#191917] border-bline hover:shadow-lg transition-all duration-300">
