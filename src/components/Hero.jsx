@@ -154,17 +154,6 @@ const Hero = () => {
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-primarytext tracking-tight">
             ML ENGINEER
           </h2>
-          <MagneticButton>
-            <div className='relative h-[20px] sm:h-[26px] w-[16px] sm:w-[20px]'>
-              <Circle ref={beepRef} fill='#37c612' stroke='none' width={16} className='absolute top-0 left-0 sm:hidden'/>
-              <Circle ref={beepRef} fill='#37c612' stroke='none' width={20} className='absolute top-0 left-0 hidden sm:block'/>
-              <Circle fill='#37c612' stroke='none' width={16} className='absolute top-0 left-0 sm:hidden'/>
-              <Circle fill='#37c612' stroke='none' width={20} className='absolute top-0 left-0 hidden sm:block'/>
-            </div>
-            <a href="#contact">
-              {"Let's Connect"}
-            </a>
-          </MagneticButton>
           <div>
             <img 
               ref={adityaRef} 
@@ -172,10 +161,21 @@ const Hero = () => {
               height={"30px"} 
               width={"90px"} 
               alt="" 
-              className='translate absolute z-30'
+              className='absolute z-30 w-20 sm:w-28 '
               style={{ willChange: 'transform' }}
             />
           </div>
+          <MagneticButton>
+            <div className='relative h-[20px] sm:h-[26px] w-[16px] sm:w-[20px]'>
+              <Circle ref={beepRef} fill='#37c612' stroke='none' width={16} className='absolute top-0 left-0 sm:hidden'/>
+              <Circle ref={beepRef} fill='#37c612' stroke='none' width={20} className='absolute top-0 left-0 hidden sm:block'/>
+              <Circle fill='#37c612' stroke='none' width={16} className='absolute top-0 left-0 sm:hidden'/>
+              <Circle fill='#37c612' stroke='none' width={20} className='absolute top-0 left-0 hidden sm:block'/>
+            </div>
+            <a href="/contactme">
+              {"Let's Connect"}
+            </a>
+          </MagneticButton>
         </div>
 
         <div className="flex items-center gap-4 sm:gap-8 flex-wrap justify-center">

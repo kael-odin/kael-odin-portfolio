@@ -7,7 +7,7 @@ import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger)
 
-const MagneticButton = ({ children, className }) => {
+export const MagneticButton = ({ children, className }) => {
   // Previous button logic remains the same
   const buttonRef = useRef(null);
   const circleRef = useRef(null);

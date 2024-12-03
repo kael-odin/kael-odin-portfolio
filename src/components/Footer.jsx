@@ -18,9 +18,19 @@ const Footer = () => {
             <div className="mb-8">
               <h3 className="text-orange-500 font-semibold mb-4">Explore</h3>
               <nav className="space-y-2">
-                <p className="hover:text-gray-300 cursor-pointer transition-colors">Home</p>
-                <p className="hover:text-gray-300 cursor-pointer transition-colors">About Me</p>
-                <p className="hover:text-gray-300 cursor-pointer transition-colors">Contact</p>
+                <p className="hover:text-gray-300 cursor-pointer transition-colors"
+                onClick={() => {
+                  window.location.href = '/'
+                }}
+                >Home</p>
+                <p className="hover:text-gray-300 cursor-pointer transition-colors"
+                onClick={() => {
+                  window.location.href = '/aboutme'
+                }}
+                >About Me</p>
+                <p className="hover:text-gray-300 cursor-pointer transition-colors" onClick={() => {
+                  window.location.href = '/contactme'
+                }}>Contact</p>
               </nav>
             </div>
           </div>
