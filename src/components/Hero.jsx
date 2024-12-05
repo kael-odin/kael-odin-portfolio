@@ -2,6 +2,10 @@ import { Circle } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
+import { RoughNotation } from "react-rough-notation";
+import Social from "./Social";
+
+
 
 const MagneticButton = ({ children ,className}) => {
   const buttonRef = useRef(null);
@@ -125,7 +129,8 @@ const Hero = () => {
   });
 
   return (
-    <main className="min-h-[85vh] flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 font-['Hanken_Grotesk'] py-8 overflow-hidden">
+    <><main className="min-h-[85vh] flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 font-['Hanken_Grotesk'] py-8">
+
       <div className="flex flex-col items-center gap-1 max-w-6xl w-full">
         <div className="flex items-center gap-2 sm:gap-4">
           <div className="bg-white rounded-full w-8 h-8 sm:w-12 sm:h-12 lg:w-20 lg:h-20 overflow-hidden">
@@ -142,35 +147,36 @@ const Hero = () => {
             FULLSTACK
           </h1>
           <div className="text-xs sm:text-sm lg:text-lg text-white font-light text-center">
-            {"// Based in"}<br/>Raipur
+            {"// Based in"}<br />Raipur
           </div>
         </div>
 
         <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold text-yellow-400 tracking-tight text-center">
-        DEVELOPER
+          DEVELOPER
         </h2>
 
         <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-primarytext tracking-tight">
-            ML ENGINEER
+            <RoughNotation type='circle' show={true} animationDelay={4000}>
+              ML ENGINEER
+            </RoughNotation>
           </h2>
           <div>
-            <img 
-              ref={adityaRef} 
-              src="/Blue_2Aditya.svg" 
-              height={"30px"} 
-              width={"90px"} 
-              alt="" 
+            <img
+              ref={adityaRef}
+              src="/Blue_2Aditya.svg"
+              height={"30px"}
+              width={"90px"}
+              alt=""
               className='absolute z-30 w-20 sm:w-28 '
-              style={{ willChange: 'transform' }}
-            />
+              style={{ willChange: 'transform' }} />
           </div>
           <MagneticButton>
             <div className='relative h-[20px] sm:h-[26px] w-[16px] sm:w-[20px]'>
-              <Circle ref={beepRef} fill='#37c612' stroke='none' width={16} className='absolute top-0 left-0 sm:hidden'/>
-              <Circle ref={beepRef} fill='#37c612' stroke='none' width={20} className='absolute top-0 left-0 hidden sm:block'/>
-              <Circle fill='#37c612' stroke='none' width={16} className='absolute top-0 left-0 sm:hidden'/>
-              <Circle fill='#37c612' stroke='none' width={20} className='absolute top-0 left-0 hidden sm:block'/>
+              <Circle ref={beepRef} fill='#37c612' stroke='none' width={16} className='absolute top-0 left-0 sm:hidden' />
+              <Circle ref={beepRef} fill='#37c612' stroke='none' width={20} className='absolute top-0 left-0 hidden sm:block' />
+              <Circle fill='#37c612' stroke='none' width={16} className='absolute top-0 left-0 sm:hidden' />
+              <Circle fill='#37c612' stroke='none' width={20} className='absolute top-0 left-0 hidden sm:block' />
             </div>
             <a href="/contactme">
               {"Let's Connect"}
@@ -180,15 +186,18 @@ const Hero = () => {
 
         <div className="flex items-center gap-4 sm:gap-8 flex-wrap justify-center">
           <div className="text-xs sm:text-sm lg:text-lg text-white font-light text-left">
-            {"// Full-Stack Developer"}<br/>ML ENGINEER <br/> DESIGNER
+            {"// Full-Stack Developer"}<br />ML ENGINEER <br /> DESIGNER
           </div>
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-teal-400 tracking-tight"><span className='text-primarytext'>&amp;</span> DESIGNER.</h2>
         </div>
       </div>
-      <p className='text-center text-lg sm:text-3xl'> 
-        I create a digital Apps that borders on <br className="sm:hidden"/><span className='bg-gradient-to-r from-purple-400 to-purple-600 text-transparent bg-clip-text tracking-tight'>Efficiency</span>, <span className='text-teal-400'>Aesthetics</span> and <span className='text-yellow-400'>Functionality</span>.
+      <p className='text-center text-lg sm:text-3xl'>
+        I create a digital Apps that borders on <br className="sm:hidden" /><span className='bg-gradient-to-r from-purple-400 to-purple-600 text-transparent bg-clip-text tracking-tight'>Efficiency</span>, <span className='text-teal-400'>Aesthetics</span> and <span className='text-yellow-400'>Functionality</span>.
       </p>
-    </main>
+
+    </main><Social /></>
+
+    
   );
 };
 

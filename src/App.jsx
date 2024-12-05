@@ -7,18 +7,42 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Projects from './pages/Projects';
 
+const NoiseOverlay = () => (
+  <svg 
+    className="pointer-events-none fixed isolate z-50 opacity-70 mix-blend-soft-light"
+    width="100%"
+    height="100%"
+  >
+    <filter id="noise">
+      <feTurbulence 
+        type="fractalNoise"
+        baseFrequency="0.80"
+        numOctaves="4"
+        stitchTiles="stitch"
+      />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noise)" />
+  </svg>
+);
+
 function App() {
   return (
-    <>
-    <Navbar/>
-    <Routes>
-      <Route path="/" element= {<Home/>}/>
-      <Route path="/contactme" element= {<ContactMe/>}/>
-      <Route path="/aboutme" element= {<AbouteMe/>}/>
-      <Route path="/projects" element= {<Projects/>}/>
-    </Routes>
-    <Footer/>
-    </>
+    <div className="min-h-screen flex flex-col">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="h-full bg-[url('https://res.cloudinary.com/delba/image/upload/h_500/bg_gradient_pfosr9')] bg-top bg-no-repeat opacity-10" />
+      </div>
+      <NoiseOverlay />
+      <Navbar />
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contactme" element={<ContactMe />} />
+          <Route path="/aboutme" element={<AbouteMe />} />
+          <Route path="/projects" element={<Projects />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
   );
 }
 

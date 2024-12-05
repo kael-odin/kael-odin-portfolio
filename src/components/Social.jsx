@@ -1,20 +1,13 @@
 import { useRef, useEffect } from 'react';
-import { X, Github, Linkedin, Dribbble, BadgeCent, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import gsap from 'gsap';
+import FloatingDock from './FloatingDock';
 
 const Soc = () => {
   const iconsRef = useRef([]);
   const dotsRef = useRef([]);
   const containerRef = useRef(null);
   const animationsRef = useRef([]);
-
-  const socialIcons = [
-    { Icon: X, href: "#" },
-    { Icon: Github, href: "#" },
-    { Icon: Linkedin, href: "#" },
-    { Icon: Dribbble, href: "#" },
-    { Icon: BadgeCent, href: "#" }
-  ];
 
   useEffect(() => {
     const container = containerRef.current;
@@ -107,28 +100,13 @@ const Soc = () => {
   return (
     <div className="flex justify-between px-2 border-t py-2 border-[#444c44]">
       <div>
-        <p>// Design, Code,<br />Engage</p>
+        <p>{'// Design, Code,'}<br />Engage</p>
       </div>
-      <div 
-        ref={containerRef} 
-        className="inline-flex items-center justify-center h-12 gap-2 px-1 py-5 border border-gray-600 rounded-full hover:bg-gray-800/20"
-      >
-        {socialIcons.map(({ Icon, href }, index) => (
-          <div key={index} className="relative">
-            <a
-              href={href}
-              ref={el => iconsRef.current[index] = el}
-              className="block w-11 h-11"
-            >
-              <Icon className="w-full h-full p-2 rounded-full bg-white text-black" />
-            </a>
-            <div
-              ref={el => dotsRef.current[index] = el}
-              className="absolute inset-0 bg-[#ffffe4] rounded-full opacity-0"
-            />
-          </div>
-        ))}
+      <div className='z-50'>
+
+      <FloatingDock/>
       </div>
+        
       <div>
       <div 
         className="inline-flex items-center justify-center h-12 gap-2 px-1 py-5 border border-gray-600 rounded-full hover:bg-gray-800/20"

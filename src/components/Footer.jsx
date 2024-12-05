@@ -49,15 +49,19 @@ const Footer = () => {
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4" onClick={() => {
+                    window.location.href = '/contactme'
+                  }}>
                 <div className="group cursor-pointer">
                   <h3 className="text-lg md:text-xl font-semibold">Contact Me</h3>
-                  <p className="text-sm text-gray-400 group-hover:text-white transition-colors">Say Hello!</p>
+                  <p className="text-sm text-gray-400 group-hover:text-white transition-colors" >Say Hello!</p>
                 </div>
                 
-                <div className="group cursor-pointer">
+                <div className="group cursor-pointer" onClick={() => {
+                    window.location.href = '/projects'
+                  }}>
                   <h3 className="text-lg md:text-xl font-semibold">My Projects</h3>
-                  <p className="text-sm text-gray-400 group-hover:text-white transition-colors">Explore Projects</p>
+                  <p className="text-sm text-gray-400 group-hover:text-white transition-colors" >Explore Projects</p>
                 </div>
               </div>
             </div>

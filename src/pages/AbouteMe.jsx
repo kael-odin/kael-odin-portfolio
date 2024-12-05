@@ -20,11 +20,32 @@ const AboutMe = () => {
     }
   ];
 
+  const ArrowIcon = () => (
+    <svg 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      className="transform rotate-[-45deg]"
+    >
+      <path 
+        d="M5 12H19M19 12L12 5M19 12L12 19" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+
   return (
-    <div className="min-h-screen bg-[#111111] text-[#e4e4e4] px-4 sm:px-8 py-12 sm:py-16">
+    <div className="min-h-screen text-[#e4e4e4] px-4 sm:px-8 py-12 sm:py-16">
+      {/* Background Gradient */}
+      
+
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
-        <div className="flex flex-col sm:flex-row justify-between items-start mb-16 relative">
+        <header className="flex flex-col sm:flex-row justify-between items-start mb-16 relative">
           <div className="w-full max-w-4xl border-b border-bline pb-8">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light text-primarytext">
@@ -32,9 +53,11 @@ const AboutMe = () => {
               </h1>
               <span className="text-4xl sm:text-5xl animate-wave">👋</span>
             </div>
+            
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light text-primarytext mb-8">
               Crafting Digital Excellence
             </h2>
+
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
               <p className="text-base sm:text-lg text-[#888888] lg:max-w-2xl">
                 As a Software Engineer, I excel in building scalable applications, enhancing user experiences, and streamlining development processes.
@@ -44,30 +67,31 @@ const AboutMe = () => {
               </p>
             </div>
           </div>
-          <div className="w-16 h-16 rounded-full bg-primarytext items-center justify-center hidden lg:flex absolute top-0 right-0">
-            <span className="text-2xl text-black">A</span>
+
+          {/* Avatar */}
+          <div className="hidden lg:flex w-16 h-16 rounded-full bg-gradient-to-tl from-purple-500/80 to-rose-400/80 absolute top-0 right-0 p-1 shadow-lg transition-all duration-300 ease-out group-hover:scale-[1.2] group-hover:rounded-[10px] group-hover:shadow-purple-500/40 group-active:translate-y-1">
+            <img src="/Avatar.png" alt="Aditya Raj" className="w-full h-full object-cover rounded-full" />
           </div>
-        </div>
+        </header>
 
         {/* Services Section */}
-        <div className="mt-16 sm:mt-24">
-          <h3 className="text-xl text-purple-500 mb-12">I can help you with</h3>
-          <div className="space-y-12 sm:space-y-16">
-            {services.map((service) => (
-              <div key={service.number} className="border-t border-[#333333] pt-8">
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
-                  <span className="text-[#444444] text-sm">{service.number}</span>
-                  <div className="flex-1">
-                    <h4 className="text-xl sm:text-2xl text-[#e4e4e4] mb-4">{service.title}</h4>
-                    <p className="text-[#888888] max-w-3xl text-base sm:text-lg">
-                      {service.description}
-                    </p>
-                  </div>
-                </div>
+        <section className="mt-16 sm:mt-24">
+          <div className="flex justify-center mb-12">
+            <h3 className="text-xl font-bold text-accentv sm:text-2xl">
+              I can help you with <span className="animate-ping">.</span>
+            </h3>
+          </div>
+
+          <div className="grid sm:grid-cols-3 gap-8">
+            {services.map(({ number, title, description }) => (
+              <div key={number} className="border-t border-bline pt-8">
+                <span className="text-[#444444] text-sm block mb-4">{number}</span>
+                <h4 className="text-xl sm:text-2xl text-primarytext mb-4">{title}</h4>
+                <p className="text-primarytext text-base sm:text-lg">{description}</p>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Contact Button */}
         <div className="mt-16 sm:mt-24 flex justify-center sm:justify-end">
@@ -75,21 +99,7 @@ const AboutMe = () => {
             <MagneticButton>
               <div className="flex items-center gap-2">
                 Contact Me
-                <svg 
-                  width="24" 
-                  height="24" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  className="transform rotate-[-45deg]"
-                >
-                  <path 
-                    d="M5 12H19M19 12L12 5M19 12L12 19" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <ArrowIcon />
               </div>
             </MagneticButton>
           </a>

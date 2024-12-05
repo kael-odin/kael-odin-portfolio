@@ -1,9 +1,10 @@
 import { useRef, useState, useEffect } from "react";
-import Social from "./Social";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ArrowUpRight, Ghost , Brain, Computer, Brush } from 'lucide-react';
+import { ArrowUpRight, Ghost , Brain, Computer, Brush,Zap } from 'lucide-react';
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import { RoughNotation , RoughNotationGroup} from "react-rough-notation";
+
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -139,19 +140,25 @@ const AboutMe = () => {
       title: "Machine Learning",
       Icon: Brain,
       color: "text-blue-500", // Using Tailwind's built-in colors
-      description: "Developing and implementing machine learning models and algorithms for data analysis, pattern recognition, and predictive modeling."
+      description: "Harnessing artificial intelligence to transform your ideas into intelligent solutions."
     },
     {
       title: "Full Stack Development",
       Icon: Computer,
       color: "text-purple-500",
-      description: "I make awesome web apps using MERN stack which are Robust and Reliable"
+      description: "Bringing your vison to life with the latest technology and design trends."
     },
     {
       title: "Desginer",
       Icon: Brush,
       color: "text-cyan-400",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem alias in minus deleniti commodi sequi, consequatur quam quaerat saepe quasi perspiciatis ducimus nemo doloribus nisi dolore. Officia quam placeat quae!"
+      description: "Designing interfaces that are intuitive, efficient, and enjoyable to use."
+    },
+    {
+      title: "Full Package",
+      Icon: Zap,
+      color: "text-yellow-300",
+      description: "My proficiency in design, coding, and interaction sets me apart within the domain of software engineering"
     }
   ];
   
@@ -165,7 +172,7 @@ const AboutMe = () => {
     if (!container) return;
     ScrollTrigger.create({
       trigger: workRef.current,
-      start: 'top center',
+      start: 'top center +=200',
       end: 'bottom center',
       once:true,
       onEnter: () => {
@@ -239,29 +246,60 @@ const AboutMe = () => {
     };
   }, []);
 
+  const highRef = useRef(null)
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (highRef.current) {
+        const rect = highRef.current.getBoundingClientRect();
+        const isVisible = (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+        setIsVisible(isVisible);
+      }}
+
+      window.addEventListener('scroll',handleScroll);
+      handleScroll();
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      }
+  })
+
   return (
     <section className="min-h-screen bg-background relative overflow-hidden">
-      <Social />
       
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-4 sm:py-8 md:py-16">
         <div className="flex flex-col gap-4 sm:gap-8 md:flex-row md:items-start md:justify-between">
           <div className="w-full md:max-w-3xl">
             <h1 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-light text-primarytext leading-relaxed">
-              Empowering success in the digital landscape. Together, we shape a visionary future, delivering on promises and continuously pioneering innovation.
+            My blend of 
+              <RoughNotationGroup> 
+              
+                <RoughNotation type="underline" color="#ffd54f" show={isVisible} padding={1} opacity={0.2} > design,   </RoughNotation>
+                <RoughNotation type="underline" color="#ffd54f" show={isVisible} padding={0} opacity={0.2} > coding, </RoughNotation>
+                <RoughNotation type="underline" color="#ffd54f" show={isVisible} padding={0} opacity={0.2} > functionality </RoughNotation>
+                and
+                <RoughNotation type="underline" color="#ffd54f" show={isVisible} padding={0} opacity={0.2} > interaction </RoughNotation>
+
+                 expertise distinguishes me within the tech industry.
+                </RoughNotationGroup>
             </h1>
           </div>
           
-          <div className="w-full md:w-auto md:max-w-xs">
+          <div className="w-full md:w-auto md:max-w-xs" ref={highRef}>
             <p className="text-base sm:text-lg text-primarytext md:pl-10">
-              My blend of design, coding, and interaction expertise distinguishes me within the tech industry.
+            Empowering success in the digital landscape. Together, we shape a visionary future, delivering on promises and continuously pioneering innovation.
             </p>
           </div>
         </div>
         
         {/* Title and Ghost Icon */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end text-primarytext mt-8 sm:mt-12">
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-bgreen leading-tight">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-bgreen  leading-tight">
             Coding the Future<br />
             Architecting Innovation
           </h2>
