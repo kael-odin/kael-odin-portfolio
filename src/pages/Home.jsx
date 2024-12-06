@@ -7,60 +7,66 @@ import TechStack from '../components/TechStack';
 import Loading from '../components/Loading';
 
 function App() {
-  const [, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const loadingRef = useRef(null);
   const contentRef = useRef(null);
 
   useEffect(() => {
-    // Initial content setup
-    if (contentRef.current) {
+    const ctx = gsap.context(() => {
+      // Initial content setup
       gsap.set(contentRef.current, { 
         opacity: 0,
         y: 20
       });
-    }
 
-    // Simulate loading time
-    const timer = setTimeout(() => {
-      // Animate loading screen up and out
-      gsap.to(loadingRef.current, {
-        y: '-100%',
-        duration: 1,
-        ease: 'power4.inOut',
-        onComplete: () => setIsLoading(false)
-      });
+      // Simulate loading time and animate
+      const timer = setTimeout(() => {
+        const tl = gsap.timeline({
+          onComplete: () => {
+            setIsLoading(false); // Update loading state
+          }
+        });
 
-      // Fade in main content
-      gsap.to(contentRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: 0.5,
-        ease: 'power3.out'
-      });
-    }, 3000);
+        tl.to(loadingRef.current, {
+          y: '-100%',
+          duration: 1,
+          ease: 'power4.inOut'
+        })
+        .to(contentRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out'
+        }, "-=0.3"); // Slightly overlap animations
 
-    return () => clearTimeout(timer);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    });
+
+    return () => ctx.revert();
   }, []);
 
   return (
     <>
       {/* Loading Screen */}
-      <div 
-        ref={loadingRef} 
-        className="fixed inset-0 z-50 bg-bline"
-        style={{ transform: 'translateY(0%)' }}
-      >
-        <Loading />
-      </div>
+      {isLoading && (
+        <div 
+          ref={loadingRef} 
+          className="fixed inset-0 z-50 bg-bline"
+          style={{ transform: 'translateY(0%)' }}
+        >
+          <Loading />
+        </div>
+      )}
 
       {/* Main Content */}
-      <div ref={contentRef}>
+      <main ref={contentRef} className="opacity-0">
         <Hero />
         <Aboutme />
         <Projects />
         <TechStack />
-      </div>
+      </main>
     </>
   );
 }

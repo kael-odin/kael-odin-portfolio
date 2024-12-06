@@ -1,8 +1,8 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
-function Loading() {
+function Loading({ onLoadingComplete }) {
   const greetings = [
     "Hello",
     "नमस्ते",
@@ -16,16 +16,27 @@ function Loading() {
     "Привет"
   ];
 
+  const containerRef = useRef(null);
   const greetRef = useRef(null);
   const indexRef = useRef(0);
   const tlRef = useRef(null);
-  const [isgone , setisgone] = useState(false) 
 
   useGSAP(() => {
+    if (!greetRef.current) return;
+
     tlRef.current = gsap.timeline({ repeat: -1 })
       .fromTo(greetRef.current, 
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
+        { 
+          opacity: 0, 
+          y: 20,
+          immediateRender: true 
+        },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.5, 
+          ease: "power2.out" 
+        }
       )
       .to(greetRef.current, {
         opacity: 1,
@@ -42,20 +53,15 @@ function Loading() {
         }
       });
 
-    return () => {
-      if (tlRef.current) {
-        tlRef.current.kill();
-        setisgone(true)
-      }
-    };
+    return () => tlRef.current?.kill();
   }, []);
 
   return (
-    <div className='h-screen w-full bg-[#0e100f] flex items-center justify-center gap-2'>
-      <div className='h-3 w-3 bg-primarytext rounded-full animate-pulse'></div>
+    <div ref={containerRef} className="h-screen w-full bg-[#0e100f] flex items-center justify-center gap-2">
+      <div className="h-3 w-3 bg-primarytext rounded-full animate-pulse" />
       <div 
         ref={greetRef} 
-        className='text-6xl font-light text-primarytext min-w-[200px]'
+        className="text-6xl font-light text-primarytext min-w-[200px]"
       >
         {greetings[0]}
       </div>
