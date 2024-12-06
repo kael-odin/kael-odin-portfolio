@@ -102,7 +102,7 @@ const Soc = () => {
       <div>
         <p>{'// Design, Code,'}<br />Engage</p>
       </div>
-      <div className='z-50'>
+      <div className='z-50 hidden sm:block'>
 
       <FloatingDock/>
       </div>
