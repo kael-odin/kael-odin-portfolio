@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ArrowUpRight, Ghost , Brain, Computer, Brush,Zap } from 'lucide-react';
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import { RoughNotation , RoughNotationGroup} from "react-rough-notation";
+
 
 
 gsap.registerPlugin(ScrollTrigger)

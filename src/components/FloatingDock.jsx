@@ -6,10 +6,10 @@ const FloatingDock = () => {
   const mouseX = useMotionValue(Infinity);
 
   const icons = [
-    { Icon: IconLetterX , href: "#", title: "Twitter" },
-    { Icon: IconBrandGithub, href: "#", title: "Github" },
-    { Icon: IconBrandLinkedin, href: "#", title: "LinkedIn" },
-    { Icon: IconBrandInstagram , href: "#", title: "Instagram" },
+    { Icon: IconLetterX , href: "https://x.com/Truterrrrr", title: "Twitter" },
+    { Icon: IconBrandGithub, href: "https://github.com/dryruffian", title: "Github" },
+    { Icon: IconBrandLinkedin, href: "https://www.linkedin.com/in/aditya-raj-panjiyara-1801b7249/", title: "LinkedIn" },
+    { Icon: IconBrandInstagram , href: "https://www.instagram.com/aditya.hu.mein/", title: "Instagram" },
   ];
 
   return (

@@ -74,7 +74,7 @@ const ContactMe = () => {
         {/* Header Section */}
         <div className="flex justify-between items-start mb-16">
           <div className="max-w-2xl">
-            <h1 className="text-6xl font-light text-[#e4e4e4] mb-6">Let's Connect!</h1>
+            <h1 className="text-6xl font-light text-[#e4e4e4] mb-6">{"Let's Connect!"}</h1>
             <p className="text-lg text-[#888888]">
              {" Whether you're looking to collaborate on a project, need a solution to a challenging problem, or just want to talk tech, feel free to reach out. Together, we can turn ideas into reality."}
             </p>

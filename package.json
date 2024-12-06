@@ -27,6 +27,7 @@
     "react-dom": "^18.3.1",
     "react-rough-notation": "^1.0.5",
     "react-router-dom": "^7.0.1",
+    "react-social-icons": "^6.18.0",
     "tailwind-merge": "^2.5.5"
   },
   "devDependencies": {
