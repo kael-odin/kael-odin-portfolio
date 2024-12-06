@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { MagneticButton } from '../components/Aboutme';
 
 const AboutMe = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MagneticButton } from '../components/Aboutme';
 import emailjs from '@emailjs/browser';
 
@@ -76,8 +76,7 @@ const ContactMe = () => {
           <div className="max-w-2xl">
             <h1 className="text-6xl font-light text-[#e4e4e4] mb-6">Let's Connect!</h1>
             <p className="text-lg text-[#888888]">
-              Whether you're looking to collaborate on a project, need a solution to a challenging problem, or 
-              just want to talk tech, feel free to reach out. Together, we can turn ideas into reality.
+             {" Whether you're looking to collaborate on a project, need a solution to a challenging problem, or just want to talk tech, feel free to reach out. Together, we can turn ideas into reality."}
             </p>
           </div>
           <div className="w-16 h-16 rounded-full bg-primarytext flex items-center justify-center">

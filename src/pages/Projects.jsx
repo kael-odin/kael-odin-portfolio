@@ -1,8 +1,7 @@
 import { useGSAP } from '@gsap/react';
 import { Presentation } from 'lucide-react';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 
 const Projects = () => {
   const projects = [
