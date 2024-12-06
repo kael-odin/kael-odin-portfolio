@@ -105,7 +105,7 @@ const Navbar = () => {
       {isMenuOpen && (
         <div
           ref={menuRef}
-          className="absolute top-full left-0 right-0 bg-black/95 border border-[#444c44] rounded-lg mt-2 mx-1 p-4 sm:hidden z-50"
+          className="absolute top-full left-0 right-0 bg-[#352f27] border border-[#444c44] rounded-lg mt-2 mx-1 p-4 sm:hidden z-50"
         >
           <div className="flex flex-col gap-4">
             {navLinks.map(({ icon, text, path }) => (
@@ -113,7 +113,7 @@ const Navbar = () => {
                 key={text}
                 href={path}
                 onClick={(e) => handleNavigation(path, e)}
-                className="flex items-center gap-2 text-sm transition-all hover:text-violet-500 p-2"
+                className="flex items-center gap-2 text-sm transition-all hover:text-violet-500 p-2 border-b border-bline"
               >
                 {icon} {text}
               </a>

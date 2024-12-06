@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 function Loading() {
   const greetings = [
@@ -19,6 +19,7 @@ function Loading() {
   const greetRef = useRef(null);
   const indexRef = useRef(0);
   const tlRef = useRef(null);
+  const [isgone , setisgone] = useState(false) 
 
   useGSAP(() => {
     tlRef.current = gsap.timeline({ repeat: -1 })
@@ -44,6 +45,7 @@ function Loading() {
     return () => {
       if (tlRef.current) {
         tlRef.current.kill();
+        setisgone(true)
       }
     };
   }, []);

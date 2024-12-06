@@ -40,9 +40,6 @@ const AboutMe = () => {
 
   return (
     <div className="min-h-screen text-[#e4e4e4] px-4 sm:px-8 py-12 sm:py-16">
-      {/* Background Gradient */}
-      
-
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
         <header className="flex flex-col sm:flex-row justify-between items-start mb-16 relative">
@@ -52,6 +49,10 @@ const AboutMe = () => {
                 Hello! I&apos;m Aditya Raj
               </h1>
               <span className="text-4xl sm:text-5xl animate-wave">👋</span>
+              {/* Avatar */}
+          <div className="hidden lg:flex w-16 h-16 rounded-full bg-gradient-to-tl from-purple-500/80 to-rose-400/80 absolute top-0 right-0 p-1 shadow-lg transition-all duration-300 ease-out group-hover:scale-[1.2] group-hover:rounded-[10px] group-hover:shadow-purple-500/40 group-active:translate-y-1">
+            <img src="/Avatar.png" alt="Aditya Raj" className="w-full h-full object-cover rounded-full" />
+          </div>
             </div>
             
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-light text-primarytext mb-8">
@@ -68,10 +69,7 @@ const AboutMe = () => {
             </div>
           </div>
 
-          {/* Avatar */}
-          <div className="hidden lg:flex w-16 h-16 rounded-full bg-gradient-to-tl from-purple-500/80 to-rose-400/80 absolute top-0 right-0 p-1 shadow-lg transition-all duration-300 ease-out group-hover:scale-[1.2] group-hover:rounded-[10px] group-hover:shadow-purple-500/40 group-active:translate-y-1">
-            <img src="/Avatar.png" alt="Aditya Raj" className="w-full h-full object-cover rounded-full" />
-          </div>
+          
         </header>
 
         {/* Services Section */}

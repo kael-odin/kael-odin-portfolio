@@ -6,6 +6,7 @@ import AbouteMe from './pages/AbouteMe';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Projects from './pages/Projects';
+import PageNotFound from './pages/PageNotFound';
 
 const NoiseOverlay = () => (
   <svg 
@@ -39,6 +40,7 @@ function App() {
           <Route path="/contactme" element={<ContactMe />} />
           <Route path="/aboutme" element={<AbouteMe />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="*" element={<PageNotFound/>}/>
         </Routes>
       </main>
       <Footer />
