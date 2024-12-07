@@ -1,6 +1,6 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 
 function Loading({ onLoadingComplete }) {
   const greetings = [

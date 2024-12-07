@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { ArrowUpRight, Ghost , Brain, Computer, Brush,Zap } from 'lucide-react';
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import { RoughNotation , RoughNotationGroup} from "react-rough-notation";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -137,6 +138,7 @@ const AboutMe = () => {
   const pathRef = useRef();
   const containerRef = useRef();
   const workRef = useRef(null)
+  const navigate = useNavigate()
   const mywork = [
     {
       title: "Machine Learning",
@@ -345,7 +347,7 @@ const AboutMe = () => {
             </div>
           </div>
 
-          <div className="flex justify-end mt-7">
+          <div className="flex justify-end mt-7" onClick={() => navigate("/aboutme")}>
             <MagneticButton>
               About Me 
               <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5"/>
