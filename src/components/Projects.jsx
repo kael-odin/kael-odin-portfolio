@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Presentation, ExternalLink } from 'lucide-react';
 import { MagneticButton } from './Aboutme';
 
