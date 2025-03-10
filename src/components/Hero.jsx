@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { RoughNotation } from "react-rough-notation";
 import Social from "./Social";
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -91,6 +92,7 @@ const MagneticButton = ({ children ,className}) => {
 const Hero = () => {
   const beepRef = useRef();
   const adityaRef = useRef(null);
+  const navigate = useNavigate()
   
   useGSAP(() => {
     gsap.to(beepRef.current, {
@@ -178,9 +180,13 @@ const Hero = () => {
               <Circle fill='#37c612' stroke='none' width={16} className='absolute top-0 left-0 sm:hidden' />
               <Circle fill='#37c612' stroke='none' width={20} className='absolute top-0 left-0 hidden sm:block' />
             </div>
-            <a href="/contactme">
+            <p
+              onClick={() => {
+                navigate('/contactme')
+              }}
+            >
               {"Let's Connect"}
-            </a>
+            </p>
           </MagneticButton>
         </div>
 

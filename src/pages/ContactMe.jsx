@@ -32,7 +32,7 @@ const ContactMe = () => {
       };
 
       await emailjs.send(
-        'service_0t7jmxd', 
+        'service_pwyhkt5', 
         'template_yugunp7', 
         templateParams,
         '4051WXShaQRMgEf84' 
@@ -151,7 +151,7 @@ const ContactMe = () => {
               <div className="text-red-500 mt-4 text-sm">{status.error}</div>
             )}
             {status.success && (
-              <div className="text-green-500 mt-4 text-sm">Message sent successfully! I will get back to yo as soon as possible</div>
+              <div className="text-green-500 mt-4 text-sm">Message sent successfully! I will get back to you as soon as possible</div>
             )}
 
             <div className="pt-8 flex justify-end">
