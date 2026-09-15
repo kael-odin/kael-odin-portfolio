@@ -67,7 +67,7 @@ function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-8 py-6">
         <div className="flex items-end justify-between gap-4 border-b border-bline pb-4">
           <h2 className="text-3xl sm:text-4xl font-bold text-primarytext">{t(caseStudies.title.zh, caseStudies.title.en)}</h2>
-          <a href="/casestudies" className="inline-flex items-center gap-1 text-sm text-accentc hover:text-accentv transition-colors">
+          <a href="#/casestudies" className="inline-flex items-center gap-1 text-sm text-accentc hover:text-accentv transition-colors">
             {t(caseStudies.all.zh, caseStudies.all.en)} <ArrowUpRight size={16} />
           </a>
         </div>

@@ -5,6 +5,7 @@ export const site = {
   name: { zh: "Kael Odin", en: "Kael Odin" },
   location: { zh: "中国 · 远程", en: "China · Remote" },
   credit: { zh: "用心构建", en: "Crafted with care" },
+  email: "t445481611@gmail.com",
 };
 
 export const nav = {

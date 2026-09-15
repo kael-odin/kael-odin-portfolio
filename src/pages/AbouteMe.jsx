@@ -80,7 +80,7 @@ const AboutMe = () => {
 
         {/* Contact Button */}
         <div className="mt-16 sm:mt-24 flex justify-center sm:justify-end">
-          <a href="/contactme" className="no-underline">
+          <a href="#/contactme" className="no-underline">
             <MagneticButton>
               <div className="flex items-center gap-2">
                 {t(aboutPage.contactCta.zh, aboutPage.contactCta.en)}

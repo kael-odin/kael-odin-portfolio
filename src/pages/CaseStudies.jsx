@@ -21,7 +21,7 @@ function CaseStudies() {
           </h1>
         </div>
         <a
-          href="/projects"
+          href="#/projects"
           className="hidden sm:inline-flex items-center gap-2 border border-bline rounded-full px-4 py-2 text-sm text-primarytext hover:text-accentv hover:border-accentv transition-colors"
         >
           {t(caseStudies.all.zh, caseStudies.all.en)} <ArrowUpRight size={16} />

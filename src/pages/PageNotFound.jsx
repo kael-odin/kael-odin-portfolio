@@ -11,7 +11,7 @@ function PageNotFound() {
           <h1 className="text-9xl font-bold text-primarytext">{notFound.title}</h1>
           <p className="text-sectext">{t(notFound.para.zh, notFound.para.en)}</p>
 
-          <a href="/">
+          <a href="#/">
           <MagneticButton className={"mt-3"}>
             {t(notFound.cta.zh, notFound.cta.en)} <ArrowUpRight/>
           </MagneticButton>

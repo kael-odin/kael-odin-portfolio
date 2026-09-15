@@ -199,7 +199,7 @@ const Projects = () => {
       </div>
 
       <div className="mt-5 flex justify-center" onClick={() => {
-        window.location.href = "/projects"
+        window.location.hash = "#/projects"
       }}>
 
       <MagneticButton>
