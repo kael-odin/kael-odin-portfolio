@@ -6,6 +6,8 @@ import { ArrowUpRight, Ghost , Brain, Computer, Brush,Zap } from 'lucide-react';
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import { RoughNotation , RoughNotationGroup} from "react-rough-notation";
 import { useNavigate } from "react-router-dom";
+import { useLang } from "../i18n/LanguageContext.jsx";
+import { intro } from "../i18n/content.js";
 
 
 
