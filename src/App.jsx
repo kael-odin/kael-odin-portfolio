@@ -9,6 +9,7 @@ import Projects from './pages/Projects';
 import CaseStudies from './pages/CaseStudies';
 import PageNotFound from './pages/PageNotFound';
 import ScrollProgress from './components/ScrollProgress';
+import SplashGate from './components/SplashGate';
 
 const NoiseOverlay = () => (
   <svg
@@ -36,18 +37,20 @@ function App() {
       </div>
       <NoiseOverlay />
       <ScrollProgress />
-      <Navbar />
-      <main className="flex-grow">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/contactme" element={<ContactMe />} />
-          <Route path="/aboutme" element={<AbouteMe />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/casestudies" element={<CaseStudies />} />
-          <Route path="*" element={<PageNotFound/>}/>
-        </Routes>
-      </main>
-      <Footer />
+      <SplashGate minTime={6000}>
+        <Navbar />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/contactme" element={<ContactMe />} />
+            <Route path="/aboutme" element={<AbouteMe />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/casestudies" element={<CaseStudies />} />
+            <Route path="*" element={<PageNotFound/>}/>
+          </Routes>
+        </main>
+        <Footer />
+      </SplashGate>
     </div>
   );
 }
