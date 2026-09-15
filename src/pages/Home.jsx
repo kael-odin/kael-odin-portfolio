@@ -4,7 +4,7 @@ import { useLang } from '../i18n/LanguageContext.jsx';
 import { intro, experience, tech, projects, caseStudies, social } from '../i18n/content.js';
 import { Hero } from '../components/Hero';
 import Aboutme from '../components/Aboutme';
-import Projects from '../components/projects';
+import Projects from '../components/Projects';
 import TechStack from '../components/TechStack';
 
 function ExperienceSkills() {
