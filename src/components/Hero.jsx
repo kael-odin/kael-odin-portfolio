@@ -93,7 +93,7 @@ const MagneticButton = ({ children ,className}) => {
 
 const Hero = () => {
   const beepRef = useRef();
-  const adityaRef = useRef(null);
+  const tagRef = useRef(null);
   const navigate = useNavigate()
   const { t } = useLang();
 
@@ -109,7 +109,7 @@ const Hero = () => {
     });
 
     const createRandomMovement = () => {
-      gsap.to(adityaRef.current, {
+      gsap.to(tagRef.current, {
         x: gsap.utils.random(-50, 50),
         y: gsap.utils.random(-30, 30),
         duration: 1,
@@ -119,8 +119,8 @@ const Hero = () => {
       });
     };
 
-    if (adityaRef.current) {
-      gsap.set(adityaRef.current, {
+    if (tagRef.current) {
+      gsap.set(tagRef.current, {
         x: 0,
         y: 0,
         rotation: 0
@@ -129,7 +129,7 @@ const Hero = () => {
     }
 
     return () => {
-      gsap.killTweensOf(adityaRef.current);
+      gsap.killTweensOf(tagRef.current);
     };
   });
 
@@ -139,7 +139,7 @@ const Hero = () => {
       <div className="flex flex-col items-center gap-1 max-w-6xl w-full">
         <div className="flex items-center gap-2 sm:gap-4">
           <div className="bg-white rounded-full w-8 h-8 sm:w-12 sm:h-12 lg:w-20 lg:h-20 overflow-hidden">
-            <img src="/Avatar.png" alt="avatar" className="w-full h-full object-cover" />
+            <img src="/Avatar.png" alt="Kael Odin" className="w-full h-full object-cover" />
           </div>
 
           <div className="px-3 sm:px-4 md:px-6 py-2 sm:py-3 border border-bline rounded-full bg-black/20 hover:bg-gray-800/20 transition-colors flex items-center font-medium gap-1 sm:gap-2 text-sm sm:text-base lg:text-lg text-primarytext">
@@ -168,8 +168,8 @@ const Hero = () => {
           </h2>
           <div>
             <img
-              ref={adityaRef}
-              src="/Blue_2Aditya.svg"
+              ref={tagRef}
+              src="/Kael_Tag.svg"
               height={"30px"}
               width={"90px"}
               alt=""

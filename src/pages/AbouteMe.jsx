@@ -38,7 +38,7 @@ const AboutMe = () => {
               <span className="text-4xl sm:text-5xl animate-wave">👋</span>
               {/* Avatar */}
           <div className="hidden lg:flex w-16 h-16 rounded-full bg-gradient-to-tl from-purple-500/80 to-rose-400/80 absolute top-0 right-0 p-1 shadow-lg transition-all duration-300 ease-out group-hover:scale-[1.2] group-hover:rounded-[10px] group-hover:shadow-purple-500/40 group-active:translate-y-1">
-            <img src="/Avatar.png" alt="avatar" className="w-full h-full object-cover rounded-full" />
+            <img src="/Avatar.png" alt="Kael Odin" className="w-full h-full object-cover rounded-full" />
           </div>
             </div>
 
