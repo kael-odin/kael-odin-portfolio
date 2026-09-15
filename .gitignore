@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 *.zip
+ref-copy.txt
+extract-*.js
+inspect-flight.js
+binil-extract.txt
