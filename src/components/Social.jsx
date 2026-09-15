@@ -2,8 +2,11 @@ import { useRef, useEffect } from 'react';
 import { Mail } from 'lucide-react';
 import gsap from 'gsap';
 import FloatingDock from './FloatingDock';
+import { useLang } from '../i18n/LanguageContext.jsx';
+import { social } from '../i18n/content.js';
 
 const Soc = () => {
+  const { t } = useLang();
   const iconsRef = useRef([]);
   const dotsRef = useRef([]);
   const containerRef = useRef(null);
@@ -24,14 +27,14 @@ const Soc = () => {
         const centerY = bounds.top + bounds.height / 2;
         const deltaX = e.clientX - centerX;
         const deltaY = e.clientY - centerY;
-        
+
         const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
         const maxDistance = 150;
         const distanceRatio = Math.min(distance / maxDistance, 1);
         const scale = Math.max(1, 1.5 - distanceRatio);
         const yOffset = -(1 - distanceRatio) * 9;
         const opacity = Math.max(0, 0.3 - distanceRatio);
-        
+
         animationsRef.current.push(
           gsap.to(icon, {
             duration: 0.3,
@@ -98,23 +101,23 @@ const Soc = () => {
   }, []);
 
   return (
-    <div className="flex justify-between px-2 border-t py-2 border-[#444c44]">
+    <div className="flex justify-between px-2 border-t py-2 border-bline text-primarytext">
       <div>
-        <p>{'// Design, Code,'}<br />Engage</p>
+        <p className="whitespace-pre-line">{t(social.tagline.zh, social.tagline.en)}</p>
       </div>
       <div className='z-50 hidden sm:block'>
 
       <FloatingDock/>
       </div>
-        
+
       <div>
-      <div 
-        className="inline-flex items-center justify-center h-12 gap-2 px-1 py-5 border border-gray-600 rounded-full hover:bg-gray-800/20"
+      <div
+        className="inline-flex items-center justify-center h-12 gap-2 px-1 py-5 border border-bline rounded-full hover:bg-gray-800/20"
       >
-        <a href="mailto:araj0259@gmail.com" className='bg-[#ffffe4] p-1 rounded-full'>
+        <a href={`mailto:${social.email}`} className='bg-primarytext p-1 rounded-full'>
           <Mail stroke='black'/>
         </a>
-        <p>araj0259@gmail.com</p>
+        <p>{social.email}</p>
         </div>
       </div>
     </div>

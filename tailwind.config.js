@@ -7,11 +7,26 @@ export default {
   theme: {
     extend: {
       colors:{
+        // Binil-clone dark theme tokens (mirror thegr8binil.me CSS variables)
+        "background":"#0e100f",
         "primarytext":"#ffffe3",
-        "bgreen":"#0fe149",
-        "accentv":"#a076fe",
-        "bline":"#444c44",
-        "diffblue":"#17f0d1"
+        "sectext":"#d1d1d1",
+        "placeholder":"#454533",
+        "accentv":"#a374ff",
+        "accentb":"#18a0fb",
+        "accenty":"#ffd074",
+        "accentl":"#ffffe3",
+        "accentc":"#17f1d1",
+        "accentp":"#ee46d3",
+        "bline":"#323228",
+        "bgcard":"#191917",
+        "bgreen":"#0ae448",
+        "bblue":"#00bad5",
+        "bviolet":"#9d95ff",
+        "bpink":"#fec5fb",
+        "borange":"#ff8709",
+        // legacy upstream aliases
+        "diffblue":"#17f1d1"
       },
       animation: {
         marquee: 'marquee 25s linear infinite',

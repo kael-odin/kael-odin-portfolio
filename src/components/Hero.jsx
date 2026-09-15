@@ -5,6 +5,8 @@ import gsap from 'gsap';
 import { RoughNotation } from "react-rough-notation";
 import Social from "./Social";
 import { useNavigate } from 'react-router-dom';
+import { useLang } from '../i18n/LanguageContext.jsx';
+import { hero } from '../i18n/content.js';
 
 
 
@@ -12,7 +14,7 @@ const MagneticButton = ({ children ,className}) => {
   const buttonRef = useRef(null);
   const circleRef = useRef(null);
   const [, setIsHovering] = useState(false);
-  
+
   useEffect(() => {
     const handleMouseMove = (e) => {
       if (buttonRef.current) {
@@ -58,7 +60,7 @@ const MagneticButton = ({ children ,className}) => {
       ease: "power2.out"
     });
   };
-  
+
   const handleMouseLeave = () => {
     gsap.to(circleRef.current, {
       y: -300,
@@ -74,14 +76,14 @@ const MagneticButton = ({ children ,className}) => {
   };
 
   return (
-    <div 
-      ref={buttonRef} 
-      className={`relative px-3 sm:px-4 md:px-6 py-2 sm:py-3 border border-[#444c44] rounded-full bg-black/20 hover:bg-gray-800/20 transition-colors flex items-center font-medium gap-1 sm:gap-2 text-base sm:text-lg z-10 overflow-hidden ${className}`}
+    <div
+      ref={buttonRef}
+      className={`relative px-3 sm:px-4 md:px-6 py-2 sm:py-3 border border-bline rounded-full bg-black/20 hover:bg-gray-800/20 transition-colors flex items-center font-medium gap-1 sm:gap-2 text-base sm:text-lg z-10 overflow-hidden text-primarytext ${className ?? ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div 
-        ref={circleRef} 
+      <div
+        ref={circleRef}
         className="h-[200px] w-[200px] bg-[#53a3ff] absolute rounded-full top-14 left-1 -z-10"
       />
       {children}
@@ -93,7 +95,8 @@ const Hero = () => {
   const beepRef = useRef();
   const adityaRef = useRef(null);
   const navigate = useNavigate()
-  
+  const { t } = useLang();
+
   useGSAP(() => {
     gsap.to(beepRef.current, {
       scale: 3,
@@ -104,7 +107,7 @@ const Hero = () => {
       ease: "power2.inOut",
       repeatDelay: 0.6,
     });
-    
+
     const createRandomMovement = () => {
       gsap.to(adityaRef.current, {
         x: gsap.utils.random(-50, 50),
@@ -124,14 +127,14 @@ const Hero = () => {
       });
       createRandomMovement();
     }
-    
+
     return () => {
       gsap.killTweensOf(adityaRef.current);
     };
   });
 
   return (
-    <><main className="min-h-[85vh] flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 font-['Hanken_Grotesk'] py-8">
+    <><main className="min-h-[85vh] flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 py-8">
 
       <div className="flex flex-col items-center gap-1 max-w-6xl w-full">
         <div className="flex items-center gap-2 sm:gap-4">
@@ -139,28 +142,28 @@ const Hero = () => {
             <img src="/Avatar.png" alt="avatar" className="w-full h-full object-cover" />
           </div>
 
-          <div className="px-3 sm:px-4 md:px-6 py-2 sm:py-3 border border-[#444c44] rounded-full bg-black/20 hover:bg-gray-800/20 transition-colors flex items-center font-medium gap-1 sm:gap-2 text-sm sm:text-base lg:text-lg">
-            {" Hello, I'm Aditya Raj Panjiyara"}
+          <div className="px-3 sm:px-4 md:px-6 py-2 sm:py-3 border border-bline rounded-full bg-black/20 hover:bg-gray-800/20 transition-colors flex items-center font-medium gap-1 sm:gap-2 text-sm sm:text-base lg:text-lg text-primarytext">
+            {t(hero.hello.zh, hero.hello.en)}
           </div>
         </div>
 
         <div className="flex items-center gap-2">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold bg-gradient-to-r from-purple-400 to-purple-600 text-transparent bg-clip-text tracking-tight">
-            FULLSTACK
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold bg-gradient-to-r from-accentv to-accentp text-transparent bg-clip-text tracking-tight">
+            {t(hero.line1.zh, hero.line1.en)}
           </h1>
-          <div className="text-xs sm:text-sm lg:text-lg text-white font-light text-center">
-            {"// Based in"}<br />Raipur
+          <div className="text-xs sm:text-sm lg:text-lg text-primarytext font-light text-center">
+            {t(`// ${hero.based.zh}`, `// ${hero.based.en}`)}<br />{t(hero.city.zh, hero.city.en)}
           </div>
         </div>
 
-        <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold text-yellow-400 tracking-tight text-center">
-          DEVELOPER
+        <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold text-accenty tracking-tight text-center">
+          {t(hero.line2.zh, hero.line2.en)}
         </h2>
 
         <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-primarytext tracking-tight">
             <RoughNotation type='circle' show={true} animationDelay={4000}>
-              ML ENGINEER
+              {t(hero.line3.zh, hero.line3.en)}
             </RoughNotation>
           </h2>
           <div>
@@ -175,35 +178,40 @@ const Hero = () => {
           </div>
           <MagneticButton>
             <div className='relative h-[20px] sm:h-[26px] w-[16px] sm:w-[20px]'>
-              <Circle ref={beepRef} fill='#37c612' stroke='none' width={16} className='absolute top-0 left-0 sm:hidden' />
-              <Circle ref={beepRef} fill='#37c612' stroke='none' width={20} className='absolute top-0 left-0 hidden sm:block' />
-              <Circle fill='#37c612' stroke='none' width={16} className='absolute top-0 left-0 sm:hidden' />
-              <Circle fill='#37c612' stroke='none' width={20} className='absolute top-0 left-0 hidden sm:block' />
+              <Circle ref={beepRef} fill='#0ae448' stroke='none' width={16} className='absolute top-0 left-0 sm:hidden' />
+              <Circle ref={beepRef} fill='#0ae448' stroke='none' width={20} className='absolute top-0 left-0 hidden sm:block' />
+              <Circle fill='#0ae448' stroke='none' width={16} className='absolute top-0 left-0 sm:hidden' />
+              <Circle fill='#0ae448' stroke='none' width={20} className='absolute top-0 left-0 hidden sm:block' />
             </div>
             <p
               onClick={() => {
                 navigate('/contactme')
               }}
             >
-              {"Let's Connect"}
+              {t(hero.connect.zh, hero.connect.en)}
             </p>
           </MagneticButton>
         </div>
 
         <div className="flex items-center gap-4 sm:gap-8 flex-wrap justify-center">
-          <div className="text-xs sm:text-sm lg:text-lg text-white font-light text-left">
-            {"// Full-Stack Developer"}<br />ML ENGINEER <br /> DESIGNER
+          <div className="text-xs sm:text-sm lg:text-lg text-primarytext font-light text-left whitespace-pre-line">
+            {t(hero.roleSide.zh, hero.roleSide.en)}
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-teal-400 tracking-tight"><span className='text-primarytext'>&amp;</span> DESIGNER.</h2>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-accentc tracking-tight"><span className='text-primarytext'>&amp;</span> {t(hero.line4.zh, hero.line4.en)}</h2>
         </div>
       </div>
-      <p className='text-center text-lg sm:text-3xl'>
-        I create a digital Apps that borders on <br className="sm:hidden" /><span className='bg-gradient-to-r from-purple-400 to-purple-600 text-transparent bg-clip-text tracking-tight'>Efficiency</span>, <span className='text-teal-400'>Aesthetics</span> and <span className='text-yellow-400'>Functionality</span>.
+      <p className='text-center text-lg sm:text-3xl text-primarytext'>
+        {t(hero.tagline.zh, hero.tagline.en).split(t(hero.tagWords.efficiency.zh, hero.tagWords.efficiency.en))[0]}
+        <span className='bg-gradient-to-r from-accentv to-accentp text-transparent bg-clip-text tracking-tight'>{t(hero.tagWords.efficiency.zh, hero.tagWords.efficiency.en)}</span>
+        {t('，', ', ')}
+        <span className='text-accentc'>{t(hero.tagWords.aesthetics.zh, hero.tagWords.aesthetics.en)}</span>
+        {t('与', ' and ')}
+        <span className='text-accenty'>{t(hero.tagWords.functionality.zh, hero.tagWords.functionality.en)}</span>
+        {t('。', '.')}
       </p>
 
     </main><Social /></>
 
-    
   );
 };
 

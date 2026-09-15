@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { MagneticButton } from '../components/Aboutme';
-import emailjs from '@emailjs/browser';
+import { useLang } from '../i18n/LanguageContext.jsx';
+import { contactPage } from '../i18n/content.js';
 
 const ContactMe = () => {
+  const { t } = useLang();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,30 +24,15 @@ const ContactMe = () => {
     setStatus({ loading: true, error: null, success: false });
 
     try {
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        organization: formData.organization,
-        task_area: formData.taskArea,
-        message: formData.message,
-        to_name: 'Aditya',
-      };
-
-      await emailjs.send(
-        'service_pwyhkt5', 
-        'template_yugunp7', 
-        templateParams,
-        '4051WXShaQRMgEf84' 
+      // Local demo: mailto fallback. Wire emailjs keys to enable real sending.
+      const subject = encodeURIComponent(t(`来自作品集的留言 · ${formData.name}`, `Portfolio message · ${formData.name}`));
+      const body = encodeURIComponent(
+        `${formData.message}\n\n— ${formData.name} (${formData.email})${formData.organization ? ` · ${formData.organization}` : ''}${formData.taskArea ? `\n${formData.taskArea}` : ''}`
       );
+      window.location.href = `mailto:${contactPage.email}?subject=${subject}&body=${body}`;
 
       setStatus({ loading: false, error: null, success: true });
-      setFormData({
-        name: '',
-        email: '',
-        organization: '', 
-        taskArea: '',
-        message: ''
-      });
+      setFormData({ name: '', email: '', organization: '', taskArea: '', message: '' });
 
       setTimeout(() => {
         setStatus(prev => ({ ...prev, success: false }));
@@ -53,10 +40,10 @@ const ContactMe = () => {
 
     } catch (error) {
       console.error('Email sending failed:', error);
-      setStatus({ 
-        loading: false, 
-        error: 'Failed to send message. Please try again later.', 
-        success: false 
+      setStatus({
+        loading: false,
+        error: t(contactPage.fail.zh, contactPage.fail.en),
+        success: false
       });
     }
   };
@@ -69,77 +56,40 @@ const ContactMe = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#111111] text-[#e4e4e4] p-8">
+    <div className="min-h-screen bg-background text-primarytext p-8">
       <div className="max-w-6xl mx-auto relative">
         {/* Header Section */}
         <div className="flex justify-between items-start mb-16">
           <div className="max-w-2xl">
-            <h1 className="text-6xl font-light text-[#e4e4e4] mb-6">{"Let's Connect!"}</h1>
-            <p className="text-lg text-[#888888]">
-             {" Whether you're looking to collaborate on a project, need a solution to a challenging problem, or just want to talk tech, feel free to reach out. Together, we can turn ideas into reality."}
+            <h1 className="text-6xl font-light text-primarytext mb-6">{t(contactPage.title.zh, contactPage.title.en)}</h1>
+            <p className="text-lg text-sectext">
+             {t(contactPage.para.zh, contactPage.para.en)}
             </p>
           </div>
           <div className="w-16 h-16 rounded-full bg-primarytext flex items-center justify-center">
-            <span className="text-2xl text-black">A</span>
+            <span className="text-2xl text-black">K</span>
           </div>
         </div>
 
         <div className="flex justify-between gap-24">
           {/* Form Section */}
           <form onSubmit={handleSubmit} className="space-y-12 flex-1">
-            {[
-              {
-                number: '01',
-                label: "What's your name?",
-                name: 'name',
-                placeholder: 'Charles Babbage*',
-                required: true
-              },
-              {
-                number: '02',
-                label: "What's your email?",
-                name: 'email',
-                placeholder: 'charles.babe@gmail.com*',
-                required: true,
-                type: 'email'
-              },
-              {
-                number: '03',
-                label: "What's the name of your organization?",
-                name: 'organization',
-                placeholder: 'the Analytical Society',
-                required: false
-              },
-              {
-                number: '04',
-                label: "What specific area or task do you need help with?",
-                name: 'taskArea',
-                placeholder: 'To improve the performance of a Next.js application',
-                required: false
-              },
-              {
-                number: '05',
-                label: "Your message",
-                name: 'message',
-                placeholder: 'Hello Adi, can you help me with...*',
-                required: true
-              }
-            ].map((field) => (
-              <div key={field.number} className="border-t border-bline pt-8">
+            {contactPage.fields.map((field) => (
+              <div key={field.num} className="border-t border-bline pt-8">
                 <div className="flex gap-8">
-                  <span className="text-[#444444] text-sm">{field.number}</span>
+                  <span className="text-sectext/60 text-sm">{field.num}</span>
                   <div className="flex-1">
-                    <label htmlFor={field.name} className="block text-primarytext text-xl mb-3">
-                      {field.label}
+                    <label htmlFor={field.key} className="block text-primarytext text-xl mb-3">
+                      {t(field.label.zh, field.label.en)}
                     </label>
                     <input
                       type={field.type || 'text'}
-                      name={field.name}
-                      required={field.required}
-                      placeholder={field.placeholder}
+                      name={field.key}
+                      id={field.key}
+                      placeholder={t(field.placeholder.zh, field.placeholder.en)}
                       onChange={handleChange}
-                      value={formData[field.name]}
-                      className="w-full bg-transparent border-none text-accentv text-lg placeholder-[#333333] focus:outline-none"
+                      value={formData[field.key]}
+                      className="w-full bg-transparent border-none text-accentv text-lg placeholder-placeholder focus:outline-none"
                     />
                   </div>
                 </div>
@@ -151,7 +101,7 @@ const ContactMe = () => {
               <div className="text-red-500 mt-4 text-sm">{status.error}</div>
             )}
             {status.success && (
-              <div className="text-green-500 mt-4 text-sm">Message sent successfully! I will get back to you as soon as possible</div>
+              <div className="text-bgreen mt-4 text-sm">{t(contactPage.success.zh, contactPage.success.en)}</div>
             )}
 
             <div className="pt-8 flex justify-end">
@@ -160,7 +110,7 @@ const ContactMe = () => {
                   type="submit"
                   disabled={status.loading}
                 >
-                  {status.loading ? 'Sending...' : 'Send Message'}
+                  {status.loading ? t(contactPage.sending.zh, contactPage.sending.en) : t(contactPage.send.zh, contactPage.send.en)}
                 </button>
               </MagneticButton>
             </div>
@@ -169,22 +119,23 @@ const ContactMe = () => {
           {/* Contact Details - Positioned on the right */}
           <div className="w-64 space-y-12 pt-8 hidden sm:block">
             <div>
-              <h3 className="text-[#444444] mb-4 tracking-wider text-sm">CONTACT DETAILS</h3>
-              <a href="mailto:araj0259@gmail.com" className="text-[#e4e4e4] hover:text-[#888888] text-lg">
-                araj0259@gmail.com
+              <h3 className="text-sectext/60 mb-4 tracking-wider text-sm">{t(contactPage.contactDetails.zh, contactPage.contactDetails.en)}</h3>
+              <a href={`mailto:${contactPage.email}`} className="text-primarytext hover:text-sectext text-lg">
+                {contactPage.email}
               </a>
             </div>
-            
+
             <div className='hidden sm:block'>
-              <h3 className="text-[#444444] mb-4 tracking-wider text-sm">SOCIALS</h3>
+              <h3 className="text-sectext/60 mb-4 tracking-wider text-sm">{t(contactPage.socials.zh, contactPage.socials.en)}</h3>
               <div className="flex flex-col gap-3">
-                {['Twitter', 'LinkedIn'].map((social) => (
+                {['GitHub', 'LinkedIn', 'X'].map((socialName) => (
                   <a
-                    key={social}
-                    href={`#${social.toLowerCase()}`}
-                    className="text-[#e4e4e4] hover:text-[#888888] text-lg"
+                    key={socialName}
+                    href="#"
+                    onClick={(e) => e.preventDefault()}
+                    className="text-primarytext hover:text-sectext text-lg"
                   >
-                    {social}
+                    {socialName}
                   </a>
                 ))}
               </div>

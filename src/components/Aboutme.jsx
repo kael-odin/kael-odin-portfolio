@@ -110,7 +110,7 @@ export const MagneticButton = ({ children, className }) => {
       ref={buttonRef} 
       className={`
         relative px-3 sm:px-4 md:px-6 py-2 sm:py-3 
-        border border-[#444c44] rounded-full 
+        border border-bline rounded-full 
         bg-black/20 hover:bg-gray-800/20 
         transition-colors duration-300
         flex items-center font-medium gap-1 sm:gap-2 
@@ -139,32 +139,14 @@ const AboutMe = () => {
   const containerRef = useRef();
   const workRef = useRef(null)
   const navigate = useNavigate()
-  const mywork = [
-    {
-      title: "Machine Learning",
-      Icon: Brain,
-      color: "text-blue-500", // Using Tailwind's built-in colors
-      description: "Harnessing artificial intelligence to transform your ideas into intelligent solutions."
-    },
-    {
-      title: "Full Stack Development",
-      Icon: Computer,
-      color: "text-purple-500",
-      description: "Bringing your vison to life with the latest technology and design trends."
-    },
-    {
-      title: "Desginer",
-      Icon: Brush,
-      color: "text-cyan-400",
-      description: "Designing interfaces that are intuitive, efficient, and enjoyable to use."
-    },
-    {
-      title: "Full Package",
-      Icon: Zap,
-      color: "text-yellow-300",
-      description: "My proficiency in design, coding, and interaction sets me apart within the domain of software engineering"
-    }
-  ];
+  const { t } = useLang();
+  const iconByIndex = [Brain, Computer, Brush, Zap];
+  const mywork = intro.cards.map((c, i) => ({
+    title: t(c.title.zh, c.title.en),
+    Icon: iconByIndex[i] ?? Zap,
+    color: c.color,
+    description: t(c.description.zh, c.description.en),
+  }));
   
   const INITIAL_PATH = "M 0 50 Q 250 50 1280 50";
   const viewBoxWidth = 1280;
@@ -280,23 +262,23 @@ const AboutMe = () => {
         <div className="flex flex-col gap-4 sm:gap-8 md:flex-row md:items-start md:justify-between">
           <div className="w-full md:max-w-3xl">
             <h1 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-light text-primarytext leading-relaxed">
-            My blend of 
-              <RoughNotationGroup> 
-              
-                <RoughNotation type="underline" color="#ffd54f" show={isVisible} padding={1} opacity={0.2} > design,   </RoughNotation>
-                <RoughNotation type="underline" color="#ffd54f" show={isVisible} padding={0} opacity={0.2} > coding, </RoughNotation>
-                <RoughNotation type="underline" color="#ffd54f" show={isVisible} padding={0} opacity={0.2} > functionality </RoughNotation>
-                and
-                <RoughNotation type="underline" color="#ffd54f" show={isVisible} padding={0} opacity={0.2} > interaction </RoughNotation>
+            {t(intro.blend.pre.zh, intro.blend.pre.en)}
+              <RoughNotationGroup>
 
-                 expertise distinguishes me within the tech industry.
+                <RoughNotation type="underline" color="#ffd54f" show={isVisible} padding={1} opacity={0.2} >{t(intro.blend.design.zh, intro.blend.design.en)}</RoughNotation>
+                <RoughNotation type="underline" color="#ffd54f" show={isVisible} padding={0} opacity={0.2} >{t(intro.blend.code.zh, intro.blend.code.en)}</RoughNotation>
+                <RoughNotation type="underline" color="#ffd54f" show={isVisible} padding={0} opacity={0.2} >{t(intro.blend.func.zh, intro.blend.func.en)}</RoughNotation>
+                {t(intro.blend.and.zh, intro.blend.and.en)}
+                <RoughNotation type="underline" color="#ffd54f" show={isVisible} padding={0} opacity={0.2} >{t(intro.blend.interaction.zh, intro.blend.interaction.en)}</RoughNotation>
+
+                 {t(intro.blend.post.zh, intro.blend.post.en)}
                 </RoughNotationGroup>
             </h1>
           </div>
-          
+
           <div className="w-full md:w-auto md:max-w-xs" ref={highRef}>
             <p className="text-base sm:text-lg text-primarytext md:pl-10">
-            Empowering success in the digital landscape. Together, we shape a visionary future, delivering on promises and continuously pioneering innovation.
+            {t(intro.side.zh, intro.side.en)}
             </p>
           </div>
         </div>
@@ -304,8 +286,8 @@ const AboutMe = () => {
         {/* Title and Ghost Icon */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end text-primarytext mt-8 sm:mt-12">
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-bgreen  leading-tight">
-            Coding the Future<br />
-            Architecting Innovation
+            {t(intro.big1.zh, intro.big1.en)}<br />
+            {t(intro.big2.zh, intro.big2.en)}
           </h2>
           <div className="hidden sm:flex justify-center bg-white rounded-full p-2 sm:p-4 items-center sm:-translate-y-2">
             <Ghost size={32} className="sm:w-10 sm:h-10 md:w-12 md:h-12" stroke="black" />
@@ -328,10 +310,10 @@ const AboutMe = () => {
             className="w-full h-auto"
             preserveAspectRatio="xMidYMid meet"
           >
-            <path 
+              <path
               ref={pathRef}
               d={INITIAL_PATH}
-              className="stroke-[#444c44]"
+              className="stroke-bline"
               strokeWidth="1"
               fill="transparent"
             />
@@ -342,14 +324,14 @@ const AboutMe = () => {
           <div className="flex flex-col items-start gap-8">
             <div className="w-full md:max-w-lg">
               <p className="text-base sm:text-lg md:text-xl font-light text-primarytext">
-                I specialize in engineering bespoke solutions, consistently pushing the limits in each project, with an unwavering dedication to prioritizing excellence.
+                {t(intro.para.zh, intro.para.en)}
               </p>
             </div>
           </div>
 
           <div className="flex justify-end mt-7" onClick={() => navigate("/aboutme")}>
             <MagneticButton>
-              About Me 
+              {t(intro.aboutCta.zh, intro.aboutCta.en)}
               <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5"/>
             </MagneticButton>
           </div>
@@ -358,15 +340,15 @@ const AboutMe = () => {
       <main className="flex flex-col items-center justify-center w-full m-auto max-w-7xl">
         <div className='flex-grow'></div>
       <div className="w-full text-center">
-        <h1 className="text-xl text-purple-500 font-semibold sm:text-2xl md:text-3xl sm:pb-10">
-          WHAT I DO
+        <h1 className="text-xl text-accentv font-semibold sm:text-2xl md:text-3xl sm:pb-10">
+          {t(intro.whatido.zh, intro.whatido.en)}
         </h1>
       </div>
 
       <div className="flex flex-row flex-wrap w-11/12 gap-4 pt-3 opacity-0" ref={workRef}>
         {mywork.map((work, index) => (
           <div key={index} className="flex-grow w-64 min-w-64">
-            <div className="h-full pt-8 pb-8 px-6 border rounded-lg bg-[#191917] border-bline hover:shadow-lg transition-all duration-300">
+            <div className="h-full pt-8 pb-8 px-6 border rounded-lg bg-bgcard border-bline hover:shadow-lg transition-all duration-300">
               <div className={`${work.color} mb-4`}>
                 <work.Icon className="w-8 h-8 mb-3" />
                 <h2 className="text-lg font-semibold">

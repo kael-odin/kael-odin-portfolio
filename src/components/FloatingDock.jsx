@@ -1,28 +1,29 @@
 import React, { useRef, useState } from 'react';
 import { IconBrandDiscord, IconBrandLinkedin, IconBrandGithub,IconLetterX,IconBrandInstagram  } from '@tabler/icons-react';
 import { motion, useMotionValue, useTransform, useSpring, AnimatePresence } from 'framer-motion';
+import { footer } from '../i18n/content.js';
 
 const FloatingDock = () => {
   const mouseX = useMotionValue(Infinity);
 
   const icons = [
-    { Icon: IconLetterX , href: "https://x.com/Truterrrrr", title: "Twitter" },
-    { Icon: IconBrandGithub, href: "https://github.com/dryruffian", title: "Github" },
-    { Icon: IconBrandLinkedin, href: "https://www.linkedin.com/in/aditya-raj-panjiyara-1801b7249/", title: "LinkedIn" },
-    { Icon: IconBrandInstagram , href: "https://www.instagram.com/aditya.hu.mein/", title: "Instagram" },
+    { Icon: IconLetterX , href: footer.socials[2].url, title: "X" },
+    { Icon: IconBrandGithub, href: footer.socials[1].url, title: "Github" },
+    { Icon: IconBrandLinkedin, href: footer.socials[0].url, title: "LinkedIn" },
+    { Icon: IconBrandInstagram , href: footer.socials[3].url, title: "Instagram" },
   ];
 
   return (
-    <motion.div 
+    <motion.div
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className="mx-auto flex h-16 items-end gap-4 rounded-full bg-primarytext dark:bg-neutral-900 border border-bline px-1 pb-2"
     >
       {icons.map((item) => (
-        <DockItem 
-          key={item.title} 
-          mouseX={mouseX} 
-          {...item} 
+        <DockItem
+          key={item.title}
+          mouseX={mouseX}
+          {...item}
         />
       ))}
     </motion.div>
@@ -49,7 +50,7 @@ const DockItem = ({ mouseX, Icon, href, title }) => {
     stiffness: 150,
     damping: 12
   });
-  
+
   const height = useSpring(heightTransform, {
     mass: 0.1,
     stiffness: 150,
@@ -79,17 +80,17 @@ const DockItem = ({ mouseX, Icon, href, title }) => {
               initial={{ opacity: 0, y: 10, x: "-50%" }}
               animate={{ opacity: 1, y: 0, x: "-50%" }}
               exit={{ opacity: 0, y: 2, x: "-50%" }}
-              className="absolute left-1/2 -top-8 px-3 py-1 rounded-md bg-bline  text-xs whitespace-nowrap"
+              className="absolute left-1/2 -top-8 px-3 py-1 rounded-md bg-bline text-primarytext  text-xs whitespace-nowrap"
             >
               {title}
             </motion.div>
           )}
         </AnimatePresence>
-        
+
         <motion.div
-          style={{ 
-            width: iconSize, 
-            height: iconSize 
+          style={{
+            width: iconSize,
+            height: iconSize
           }}
           className="flex items-center justify-center"
         >

@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Hanken Grotesk", "Noto Sans SC", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #171716;
+  color-scheme: dark;
+  color: #ffffe3;
+  background-color: #0e100f;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,4 +17,32 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  overflow-x: hidden;
+}
 
+body {
+  background-color: #0e100f;
+  color: #ffffe3;
+  overflow-x: hidden;
+}
+
+/* Binil-style scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0e100f;
+}
+::-webkit-scrollbar-thumb {
+  background: #a374ff;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #17f1d1;
+}
+
+::selection {
+  background: #a374ff;
+  color: #0e100f;
+}
