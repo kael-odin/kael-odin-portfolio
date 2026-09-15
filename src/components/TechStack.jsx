@@ -1,4 +1,4 @@
-import { Cover } from './ui/cover';
+import { Cover } from './ui/Cover';
 import { useLang } from '../i18n/LanguageContext.jsx';
 import { tech } from '../i18n/content.js';
 
