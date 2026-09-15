@@ -1,136 +1,147 @@
-import { House, Briefcase, IdCard, User, Menu, X } from 'lucide-react';
-import { useGSAP } from '@gsap/react';
-import { useRef, useState } from 'react';
-import gsap from "gsap";
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { BiHomeAlt2, BiBookOpen, BiBriefcase, BiIdCard, BiMailSend } from 'react-icons/bi';
 import { useLang } from '../i18n/LanguageContext.jsx';
 import { nav } from '../i18n/content.js';
 import LangSwitch from './LangSwitch.jsx';
 
-const NavItems = ({ children, className = '', onClick }) => (
-  <div onClick={onClick} className={`flex items-center h-6 gap-1 px-3 py-4 border border-bline rounded-full hover:bg-gray-800/20 cursor-pointer transition-colors ${className}`}>
-    {children}
-  </div>
-);
-
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navRef = useRef();
-  const menuRef = useRef();
+// Reference-style navbar: brand pill left, link pill center (desktop),
+// social circles + LangSwitch right. Mobile opens a full-screen numbered menu.
+function Navbar() {
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
   const { t } = useLang();
-  
-  useGSAP(() => {
-    gsap.from(navRef.current, {
-      y: -50,
-      duration: 1,
-      ease: "power2.out"
-    });
-  }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(prev => !prev);
-    
-    if (!isMenuOpen) {
-      gsap.fromTo(menuRef.current,
-        { opacity: 0, y: -20 },
-        { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }
-      );
-    } else {
-      gsap.to(menuRef.current, {
-        opacity: 0,
-        y: -20,
-        duration: 0.3,
-        ease: "power2.in"
-      });
-    }
-  };
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [open ]);
 
-  const navLinks = [
-    { icon: <House size={16} />, text: t(nav.links[0].zh, nav.links[0].en), path: '/' },
-    { icon: <Briefcase size={16} />, text: t(nav.links[1].zh, nav.links[1].en), path: '/projects' },
-    { icon: <IdCard size={16} />, text: t(nav.links[2].zh, nav.links[2].en), path: '/aboutme' },
-    { icon: <User size={16} />, text: t(nav.links[3].zh, nav.links[3].en), path: '/contactme' }
+  const links = [
+    { href: '/', Icon: BiHomeAlt2, label: t(nav.links[0].zh, nav.links[0].en) },
+    { href: '/casestudies', Icon: BiBookOpen, label: t('案例', 'Case Studies') },
+    { href: '/projects', Icon: BiBriefcase, label: t(nav.links[1].zh, nav.links[1].en) },
+    { href: '/aboutme', Icon: BiIdCard, label: t(nav.links[2].zh, nav.links[2].en) },
+    { href: '/contactme', Icon: BiMailSend, label: t(nav.links[3].zh, nav.links[3].en) },
   ];
 
-  const handleNavigation = (path, e) => {
-    e.preventDefault();
-    navigate(path);
-    if (isMenuOpen) setIsMenuOpen(false);
+  const go = (href) => {
+    setOpen(false);
+    navigate(href);
   };
 
-  return (
-    <div className="relative">
-      <nav ref={navRef} className="px-1 py-3 flex justify-between border-bline items-center gap-2 border-b mx-1">
-        <NavItems onClick={() => navigate("/")}>
-          <div className="flex items-center gap-1">
-            <div className="w-3 h-3 rounded-3xl bg-white sm:w-4 sm:h-4"></div>
-            <span className="text-sm hover:text-accentv transition-colors">{t(nav.brand.zh, nav.brand.en)}</span>
-          </div>
-        </NavItems>
+  const socials = [
+    { href: 'https://x.com/', label: 'X' },
+    { href: 'https://github.com/', label: 'GitHub' },
+    { href: 'https://www.linkedin.com/', label: 'LinkedIn' },
+  ];
 
-        {/* Desktop Menu */}
-        <NavItems className="hidden sm:flex gap-2">
-          {navLinks.slice(0, 3).map(({ icon, text, path }) => (
-            <a 
-              key={text} 
-              href={path}
-              onClick={(e) => handleNavigation(path, e)}
-              className="flex items-center gap-1 text-sm transition-all hover:text-accentv"
+  return (
+    <>
+      <nav className="flex items-center justify-between mx-1 sm:mx-2 md:mx-3 lg:mx-4 h-14 sm:h-16 lg:h-20">
+        <div>
+          <div className="flex items-center gap-2 px-3 py-2 border border-bline rounded-3xl">
+            <div className="w-3 h-3 rounded-3xl bg-primarytext sm:w-4 sm:h-4" />
+            <button type="button" onClick={() => go('/')} className="text-md text-primarytext sm:text-lg">
+              {t(nav.brand.zh, nav.brand.en)}
+            </button>
+          </div>
+        </div>
+
+        <div className="flex">
+          <div className="flex items-center lg:border lg:border-bline rounded-3xl lg:p-3">
+            <ul className="hidden gap-5 text-base lg:flex lg:items-center text-primarytext">
+              {links.map(({ href, Icon, label }) => {
+                const active = location.pathname === href;
+                return (
+                  <li key={href}>
+                    <button
+                      type="button"
+                      onClick={() => go(href)}
+                      className={'flex items-center gap-1 transition-all ' + (active ? 'text-accentb' : 'hover:text-accentb')}
+                    >
+                      <Icon size={16} /> {label}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="lg:hidden text-primarytext">
+              <button
+                type="button"
+                aria-label={open ? 'Close menu' : 'Open menu'}
+                aria-expanded={open}
+                onClick={() => setOpen(!open)}
+                className="flex flex-col items-center justify-center w-11 h-11 gap-[6px] border rounded-full border-bline"
+              >
+                <span className={'block h-[2px] w-5 rounded-full ' + (open ? 'bg-accentv' : 'bg-primarytext')} />
+                <span className={'block h-[2px] w-5 rounded-full ' + (open ? 'bg-accentv' : 'bg-primarytext')} />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="hidden lg:flex items-center gap-2">
+          {socials.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={s.label}
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-primarytext text-black text-xs font-bold"
             >
-              {icon} {text}
+              {s.label[0]}
             </a>
           ))}
-        </NavItems>
-        
-        <NavItems className="hidden sm:flex">
-          <a 
-            href="/contactme"
-            onClick={(e) => handleNavigation('/contactme', e)}
-            className="flex items-center gap-1 text-sm transition-all hover:text-accentv"
-          >
-            <User size={16} /> {t(nav.links[3].zh, nav.links[3].en)}
-          </a>
-        </NavItems>
-
-        <div className="hidden sm:flex"><LangSwitch /></div>
-
-        {/* Mobile Menu Button */}
-        <NavItems className="sm:hidden">
-          <button
-            onClick={toggleMenu}
-            aria-label="Toggle menu" data-langswitch-mobile
-            className="flex items-center gap-1 text-sm transition-all hover:text-accentv"
-          >
-            {isMenuOpen ? <X size={16} /> : <Menu size={16} />}
-          </button>
-        </NavItems>
+          <LangSwitch />
+        </div>
+        <div className="lg:hidden">
+          <LangSwitch />
+        </div>
       </nav>
 
-      <div className="sm:hidden flex justify-end px-1 pt-2"><LangSwitch /></div>
-
-      {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div
-          ref={menuRef}
-          className="absolute top-full left-0 right-0 bg-bgcard border border-bline rounded-lg mt-2 mx-1 p-4 sm:hidden z-50"
-        >
-          <div className="flex flex-col gap-4">
-            {navLinks.map(({ icon, text, path }) => (
-              <a
-                key={text}
-                href={path}
-                onClick={(e) => handleNavigation(path, e)}
-                className="flex items-center gap-2 text-sm transition-all hover:text-accentv p-2 border-b border-bline"
-              >
-                {icon} {text}
-              </a>
-            ))}
+      {open && (
+        <div className="fixed inset-0 z-[80] bg-background/95 backdrop-blur-md lg:hidden">
+          <div className="flex flex-col h-full px-6 pt-20 pb-8">
+            <button
+              type="button"
+              aria-label="Close menu"
+              onClick={() => setOpen(false)}
+              className="relative flex items-center justify-center border rounded-full w-11 h-11 border-bline self-end"
+            >
+              <span className="absolute block h-[2px] w-5 rounded-full bg-accentv" style={{ transform: 'rotate(45deg)' }} />
+              <span className="absolute block h-[2px] w-5 rounded-full bg-accentv" style={{ transform: 'rotate(-45deg)' }} />
+            </button>
+            <ul className="mt-6 flex flex-col gap-2">
+              {links.map(({ href, Icon, label }, i) => {
+                const active = location.pathname === href;
+                return (
+                  <li key={href}>
+                    <button
+                      type="button"
+                      onClick={() => go(href)}
+                      className="group flex items-center gap-4 w-full text-left py-2"
+                    >
+                      <span className="text-sm text-sectext">{String(i + 1).padStart(2, '0')}</span>
+                      <span className={'text-5xl font-light tracking-tight transition-colors ' + (active ? 'text-accentb' : 'text-sectext group-hover:text-primarytext')}>
+                        {label}
+                      </span>
+                      <Icon size={20} className={active ? 'text-accentb' : 'text-sectext'} />
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="mt-auto flex justify-center">
+              <LangSwitch />
+            </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
-};
+}
 
 export default Navbar;

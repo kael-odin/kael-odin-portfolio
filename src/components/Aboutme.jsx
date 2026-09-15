@@ -350,14 +350,15 @@ const AboutMe = () => {
       <div className="flex flex-row flex-wrap w-11/12 gap-4 pt-3 opacity-0" ref={workRef}>
         {mywork.map((work, index) => (
           <div key={index} className="flex-grow w-64 min-w-64">
-            <div className="h-full pt-8 pb-8 px-6 border rounded-lg bg-bgcard border-bline hover:shadow-lg transition-all duration-300">
-              <div className={`${work.color} mb-4`}>
-                <work.Icon className="w-8 h-8 mb-3" />
-                <h2 className="text-lg font-semibold">
+            <div className="h-full pt-4 pb-10 pl-6 pr-10 border rounded-md bg-bgcard border-bline hover:shadow-lg transition-all duration-300">
+              <DotMatrix rows={3} cols={18} />
+              <div className="relative flex flex-col gap-2 pt-6">
+                <work.Icon size={44} className={work.color} />
+                <h2 className="text-lg font-semibold text-primarytext">
                   {work.title}
                 </h2>
               </div>
-              <p className="text-primarytext leading-relaxed">
+              <p className="text-sectext leading-relaxed pt-3">
                 {work.description}
               </p>
             </div>
@@ -368,5 +369,28 @@ const AboutMe = () => {
     </section>
   );
 };
+
+// Reference-style dot-matrix header for WHAT I DO cards (18x3 one-dot grid).
+function DotMatrix({ rows = 3, cols = 18 }) {
+  const dots = [];
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      dots.push(
+        <div key={`${r}-${c}`} className="relative flex items-center justify-center">
+          <div className="bg-[#666] h-[1px] w-[1px] rounded-full relative z-20" />
+        </div>
+      );
+    }
+  }
+  return (
+    <div
+      aria-hidden="true"
+      className="h-24 p-1 w-full"
+      style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: "1px" }}
+    >
+      {dots}
+    </div>
+  );
+}
 
 export default AboutMe;

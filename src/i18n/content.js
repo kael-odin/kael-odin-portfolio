@@ -257,7 +257,7 @@ export const contactPage = {
   fail: { zh: "发送失败，请稍后再试。", en: "Failed to send message. Please try again later." },
   contactDetails: { zh: "联系方式", en: "CONTACT DETAILS" },
   socials: { zh: "社交媒体", en: "SOCIALS" },
-  email: "hello@kaelodin.me",
+  email: "t445481611@gmail.com",
 };
 
 export const projectsPage = {
@@ -295,7 +295,7 @@ export const footer = {
 
 export const social = {
   tagline: { zh: "// 设计，代码，\n连接", en: "// Design, Code,\nEngage" },
-  email: "hello@kaelodin.me",
+  email: "t445481611@gmail.com",
 };
 
 export const notFound = {

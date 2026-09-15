@@ -2,24 +2,15 @@
 <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 928.33 563.89">
   <defs>
     <style>
-      .cls-1, .cls-2, .cls-3 {
-        isolation: isolate;
-      }
-
-      .cls-2 {
-        letter-spacing: -.05em;
-      }
-
+      .cls-1 { isolation: isolate; }
       .cls-2, .cls-3 {
         fill: #fff;
         font-family: Arial-BoldMT, Arial;
         font-size: 173.88px;
         font-weight: 700;
+        letter-spacing: -.02em;
       }
-
-      .cls-4 {
-        fill: #39f;
-      }
+      .cls-4 { fill: #39f; }
     </style>
   </defs>
   <g id="Layer_1-2" data-name="Layer 1">
@@ -28,9 +19,7 @@
         <path class="cls-4" d="M282.87,200.4l-.23.89c-2.08,6.79-8.34,11.51-15.64,11.77l-110.7,3.95-48.3,102.09c-3.05,6.44-9.98,10.25-17.27,9.48-7.28-.77-13.36-5.92-15.12-12.88L.51,20.61C-1.24,13.77,1.59,6.62,7.59,2.74c6-3.87,13.89-3.62,19.76.61l248.88,179.49c5.68,4.08,8.25,11.01,6.65,17.56h0Z"/>
         <path class="cls-4" d="M324.48,347.01h530.62c40.45,0,73.24,44.95,73.24,100.4h0c0,55.46-32.79,100.41-73.24,100.41H324.48c-40.45,0-73.24-44.95-73.24-100.4h0c0-55.46,32.79-100.41,73.24-100.41Z"/>
         <g class="cls-1">
-          <text class="cls-2" transform="translate(342.92 498.43) scale(1.03 1)"><tspan x="0" y="0">K</tspan></text>
-          <text class="cls-3" transform="translate(454.46 498.43) scale(1.03 1)"><tspan x="0" y="0">ae</tspan></text>
-          <text class="cls-3" transform="translate(604.33 498.43) scale(1.03 1)"><tspan x="0" y="0">l</tspan></text>
+          <text class="cls-2" transform="translate(360 498.43) scale(1.03 1)"><tspan x="0" y="0">Kael</tspan></text>
         </g>
       </g>
     </g>

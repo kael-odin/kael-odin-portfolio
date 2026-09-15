@@ -2,11 +2,12 @@ import { Circle } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
-import { RoughNotation } from "react-rough-notation";
 import Social from "./Social";
 import { useNavigate } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext.jsx';
 import { hero } from '../i18n/content.js';
+import CellGrid, { useRevealGridCols } from './CellGrid.jsx';
+import { TextAnimate, StaggerGroup, StaggerItem } from './motion.jsx';
 
 
 
@@ -95,7 +96,8 @@ const Hero = () => {
   const beepRef = useRef();
   const tagRef = useRef(null);
   const navigate = useNavigate()
-  const { t } = useLang();
+  const { lang, t } = useLang();
+  const gridCols = useRevealGridCols();
 
   useGSAP(() => {
     gsap.to(beepRef.current, {
@@ -136,43 +138,42 @@ const Hero = () => {
   return (
     <><main className="min-h-[85vh] flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 py-8">
 
-      <div className="flex flex-col items-center gap-1 max-w-6xl w-full">
-        <div className="flex items-center gap-2 sm:gap-4">
-          <div className="bg-white rounded-full w-8 h-8 sm:w-12 sm:h-12 lg:w-20 lg:h-20 overflow-hidden">
+      <StaggerGroup className="flex flex-col items-center gap-1 max-w-6xl w-full" stagger={0.12} delay={0.1}>
+        <StaggerItem className="flex items-center gap-2 sm:gap-4">
+          <div className="rounded-full w-11 h-11 lg:w-14 lg:h-14 overflow-hidden border border-bline">
             <img src="/Avatar.png" alt="Kael Odin" className="w-full h-full object-cover" />
           </div>
 
           <div className="px-3 sm:px-4 md:px-6 py-2 sm:py-3 border border-bline rounded-full bg-black/20 hover:bg-gray-800/20 transition-colors flex items-center font-medium gap-1 sm:gap-2 text-sm sm:text-base lg:text-lg text-primarytext">
             {t(hero.hello.zh, hero.hello.en)}
           </div>
-        </div>
+        </StaggerItem>
 
-        <div className="flex items-center gap-2">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold bg-gradient-to-r from-accentv to-accentp text-transparent bg-clip-text tracking-tight">
-            {t(hero.line1.zh, hero.line1.en)}
-          </h1>
-          <div className="text-xs sm:text-sm lg:text-lg text-primarytext font-light text-center">
-            {t(`// ${hero.based.zh}`, `// ${hero.based.en}`)}<br />{t(hero.city.zh, hero.city.en)}
-          </div>
-        </div>
+        <StaggerItem className="text-primarytext flex text-[10px] items-center justify-center gap-2 pr-6 sm:ml-10">
+          <p className="sm:hidden hidden">{t('// 产品设计师', '// Product Designer')}<br />{t('与经理', '& Manager')}</p>
+          <TextAnimate as="h1" className="whitespace-pre-wrap text-5xl font-semibold text-accentv md:text-6xl lg:text-8xl" delay={0.15}>
+            {lang === 'zh' ? 'AI 原生' : 'AI-NATIVE'}
+          </TextAnimate>
+          <p className="sm:text-xs md:text-sm lg:text-base hidden sm:block">{t('// 坐标', '// Based in')}<br />{t(hero.city.zh, hero.city.en)}</p>
+        </StaggerItem>
 
-        <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-bold text-accenty tracking-tight text-center">
-          {t(hero.line2.zh, hero.line2.en)}
-        </h2>
+        <StaggerItem>
+          <TextAnimate as="h1" className="whitespace-pre-wrap text-5xl font-semibold text-accenty md:text-6xl lg:text-8xl" delay={0.3}>
+            {lang === 'zh' ? '产品经理' : 'PRODUCT'}
+          </TextAnimate>
+        </StaggerItem>
 
-        <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-primarytext tracking-tight">
-            <RoughNotation type='circle' show={true} animationDelay={4000}>
-              {t(hero.line3.zh, hero.line3.en)}
-            </RoughNotation>
-          </h2>
+        <StaggerItem className="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">
+          <TextAnimate as="h1" className="whitespace-pre-wrap text-5xl font-semibold text-accentl md:text-6xl lg:text-8xl" delay={0.45}>
+            {lang === 'zh' ? '经理' : 'MANAGER'}
+          </TextAnimate>
           <div>
             <img
               ref={tagRef}
               src="/Kael_Tag.svg"
               height={"30px"}
               width={"90px"}
-              alt=""
+              alt="Kael"
               className='absolute z-30 w-20 sm:w-28 '
               style={{ willChange: 'transform' }} />
           </div>
@@ -191,24 +192,31 @@ const Hero = () => {
               {t(hero.connect.zh, hero.connect.en)}
             </p>
           </MagneticButton>
-        </div>
+        </StaggerItem>
 
-        <div className="flex items-center gap-4 sm:gap-8 flex-wrap justify-center">
-          <div className="text-xs sm:text-sm lg:text-lg text-primarytext font-light text-left whitespace-pre-line">
-            {t(hero.roleSide.zh, hero.roleSide.en)}
-          </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-accentc tracking-tight"><span className='text-primarytext'>&amp;</span> {t(hero.line4.zh, hero.line4.en)}</h2>
-        </div>
-      </div>
-      <p className='text-center text-lg sm:text-3xl text-primarytext'>
-        {t(hero.tagline.zh, hero.tagline.en).split(t(hero.tagWords.efficiency.zh, hero.tagWords.efficiency.en))[0]}
-        <span className='bg-gradient-to-r from-accentv to-accentp text-transparent bg-clip-text tracking-tight'>{t(hero.tagWords.efficiency.zh, hero.tagWords.efficiency.en)}</span>
-        {t('，', ', ')}
-        <span className='text-accentc'>{t(hero.tagWords.aesthetics.zh, hero.tagWords.aesthetics.en)}</span>
-        {t('与', ' and ')}
-        <span className='text-accenty'>{t(hero.tagWords.functionality.zh, hero.tagWords.functionality.en)}</span>
-        {t('。', '.')}
-      </p>
+        <StaggerItem className="text-primarytext flex text-[10px] items-center justify-center gap-4 sm:mr-24">
+          <p>{t('// 产品使命', '// Product with')}<br />{t('目标与影响', 'Purpose & Impact')}</p>
+          <TextAnimate as="h1" className="whitespace-pre-wrap text-5xl font-semibold text-accentc md:text-6xl lg:text-8xl" delay={0.6}>
+            {lang === 'zh' ? '& 设计师' : '& DESIGNER'}
+          </TextAnimate>
+        </StaggerItem>
+      </StaggerGroup>
+      <StaggerGroup className="flex flex-col items-center gap-3 w-full" stagger={0.1} delay={0.65}>
+        <StaggerItem>
+          <p className='text-center text-lg sm:text-2xl text-primarytext max-w-4xl'>
+            {t(hero.tagline.zh, hero.tagline.en).split(t(hero.tagWords.efficiency.zh, hero.tagWords.efficiency.en))[0]}
+            <span className='bg-gradient-to-r from-accentv to-accentp text-transparent bg-clip-text tracking-tight'>{t(hero.tagWords.efficiency.zh, hero.tagWords.efficiency.en)}</span>
+            {t('，', ', ')}
+            <span className='text-accentc'>{t(hero.tagWords.aesthetics.zh, hero.tagWords.aesthetics.en)}</span>
+            {t('与', ' and ')}
+            <span className='text-accenty'>{t(hero.tagWords.functionality.zh, hero.tagWords.functionality.en)}</span>
+            {t('。', '.')}
+          </p>
+        </StaggerItem>
+        <StaggerItem className="w-full overflow-hidden">
+          <CellGrid rows={10} cols={gridCols} cellSize={64} />
+        </StaggerItem>
+      </StaggerGroup>
 
     </main><Social /></>
 

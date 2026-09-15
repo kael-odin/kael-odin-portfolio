@@ -3,14 +3,16 @@ import gsap from 'gsap';
 import { useRef } from 'react';
 
 function Loading({ onLoadingComplete }) {
-  // One greeting per language family: CJK first, then a world tour covering
-  // every major language by native-speaker population. No duplicates.
+  // One greeting per language: CJK first, then a world tour covering every
+  // major language by native-speaker population. No duplicate texts.
   const greetings = [
     { text: '你好', label: '中文 Chinese' },
     { text: '您好', label: '中文 · 敬语 Mandarin formal' },
-    { text: '粵語你好', label: '粵語 Cantonese' },
+    { text: '雷猴', label: '粵語 Cantonese' },
     { text: 'こんにちは', label: '日本語 Japanese' },
+    { text: 'こんばんは', label: '日本語 · 夜 Japanese evening' },
     { text: '안녕하세요', label: '한국어 Korean' },
+    { text: '반갑습니다', label: '한국어 · 初见 Korean glad-to-meet' },
     { text: 'Hello', label: 'English' },
     { text: 'Hola', label: 'Español Spanish' },
     { text: 'नमस्ते', label: 'हिन्दी Hindi' },
@@ -33,20 +35,18 @@ function Loading({ onLoadingComplete }) {
     { text: 'Xin chào', label: 'Tiếng Việt Vietnamese' },
     { text: 'Apa kabar', label: 'Bahasa Indonesia' },
     { text: 'Kamusta', label: 'Filipino' },
-    { text: '日本語の夜はこんばんは', label: '日本語 · 夜 Japanese evening' },
-    { text: '반갑습니다', label: '한국어 · 初见 Korean glad-to-meet' },
     { text: 'Hej', label: 'Svenska Swedish' },
-    { text: 'Hallo', label: 'Norsk Norwegian' },
+    { text: 'Hei', label: 'Norsk Norwegian' },
     { text: 'Merhaba', label: 'Türkçe Turkish' },
     { text: 'سلام', label: 'فارسی Persian' },
-    { text: 'اردو میں خوش آمدید', label: 'اردو Urdu' },
+    { text: 'خوش آمدید', label: 'اردو Urdu' },
     { text: 'မင်္ဂလာပါ', label: 'မြန်မာ Burmese' },
     { text: 'សួស្តី', label: 'ខ្មែរ Khmer' },
     { text: 'ສະບາຍດີ', label: 'ລາວ Lao' },
     { text: 'Selamat pagi', label: 'Bahasa Melayu Malay' },
     { text: 'જય શ્રી કૃષ્ણ', label: 'ગુજરાતી · 问候 Gujarati greeting' },
     { text: 'Jambo', label: 'Kiswahili Swahili' },
-    { text: 'murakoze', label: 'Kinyarwanda' },
+    { text: 'Murakoze', label: 'Kinyarwanda' },
   ];
 
   const containerRef = useRef(null);
