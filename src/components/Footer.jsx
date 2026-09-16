@@ -118,24 +118,11 @@ function FooterCredits() {
   );
 }
 
-export function FooterEmailPill() {
-  return (
-    <a
-      href={'mailto:' + (site.email || 't445481611@gmail.com')}
-      className="fixed bottom-4 right-4 z-40 hidden sm:flex items-center gap-2 px-4 py-2 rounded-full border border-bline bg-bgcard/80 backdrop-blur-md text-primarytext text-sm hover:border-accentb transition-colors"
-    >
-      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primarytext text-black text-[10px] font-bold">@</span>
-      {site.email}
-    </a>
-  );
-}
-
 export default function FooterWrap() {
   return (
     <>
       <Footer />
       <FooterCredits />
-      <FooterEmailPill />
     </>
   );
 }

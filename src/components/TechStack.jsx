@@ -25,7 +25,7 @@ function TechStack() {
   return (
     <div className="overflow-hidden py-20">
       <h1 className="text-4xl md:text-4xl lg:text-6xl font-semibold max-w-7xl mx-auto text-center relative py-6 text-primarytext">
-        {t(tech.heading.pre.zh, tech.heading.pre.en)}<span className="z-40">{t(tech.heading.amazing.zh, tech.heading.amazing.en)}</span>{t(tech.heading.mid.zh, tech.heading.mid.en)}<br /> at{" "}
+        {t(tech.heading.pre.zh, tech.heading.pre.en)}<span className="z-40">{t(tech.heading.amazing.zh, tech.heading.amazing.en)}</span>{t(tech.heading.mid.zh, tech.heading.mid.en)}<br />{" "}
         <Cover>{t(tech.heading.cover.zh, tech.heading.cover.en)}</Cover>
       </h1>
 

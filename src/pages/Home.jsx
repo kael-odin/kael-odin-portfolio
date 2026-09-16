@@ -49,9 +49,12 @@ function TechHeading() {
   const { t } = useLang();
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-8 pt-4 pb-2 text-center">
-      <p className="text-xs tracking-[0.3em] uppercase text-sectext">{t(tech.items ? 'MY TECH STACK' : 'MY TECH STACK', 'MY TECH STACK')}</p>
-      <p className="text-sectext max-w-3xl mx-auto mt-3">
-        {t(intro.side.zh, intro.side.en)}
+      <p className="text-xs tracking-[0.3em] uppercase text-sectext">MY TECH STACK</p>
+      <p className="text-primarytext text-xl sm:text-2xl md:text-3xl max-w-4xl mx-auto mt-4 leading-relaxed">
+        {t(tech.intro.pre.zh, tech.intro.pre.en)}
+        <span className="text-accenty">{t(tech.intro.hi.zh, tech.intro.hi.en)}</span>
+        {t(tech.intro.mid.zh, tech.intro.mid.en)}
+        <span className="text-accentc">{t(tech.intro.hi2.zh, tech.intro.hi2.en)}</span>
       </p>
     </section>
   );

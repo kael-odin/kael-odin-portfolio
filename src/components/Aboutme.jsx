@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { ArrowUpRight, Ghost , Brain, Computer, Brush,Zap } from 'lucide-react';
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import { RoughNotation , RoughNotationGroup} from "react-rough-notation";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useLang } from "../i18n/LanguageContext.jsx";
 import { intro } from "../i18n/content.js";
@@ -155,30 +156,8 @@ const AboutMe = () => {
   const viewBoxHeight = 100;
 
   useGSAP(() => {
-    // Previous GSAP logic remains the same
     const container = containerRef.current;
     if (!container) return;
-    ScrollTrigger.create({
-      trigger: workRef.current,
-      start: 'top center +=200',
-      end: 'bottom center',
-      once:true,
-      onEnter: () => {
-        gsap.to(workRef.current, {
-          opacity: 1,
-          duration: 0.1,
-          ease: 'none',
-        });
-        gsap.from(workRef.current.children, {
-          y: 50,
-          opacity: 0,
-          stagger: 0.2,
-          duration: 0.8,
-          ease: 'power2.out',
-        });
-      }
-    });
-
     const updatePath = (x, y) => {
       const rect = container.getBoundingClientRect();
       const scaledX = (x / rect.width) * viewBoxWidth;
@@ -298,7 +277,7 @@ const AboutMe = () => {
       </div>
 
       {/* Interactive Line and Bottom Content */}
-      <div className="relative w-full mt-8 sm:-translate-y-24">
+      <div className="relative w-full mt-8 sm:-translate-y-10">
         <div 
           ref={containerRef}
           className="relative mx-auto touch-none"
@@ -347,9 +326,16 @@ const AboutMe = () => {
         </h1>
       </div>
 
-      <div className="flex flex-row flex-wrap w-11/12 gap-4 pt-3 opacity-0" ref={workRef}>
+      <div className="flex flex-row flex-wrap w-11/12 gap-4 pt-3" ref={workRef}>
         {mywork.map((work, index) => (
-          <div key={index} className="flex-grow w-72 min-w-72">
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: 'easeOut', delay: index * 0.2 }}
+            className="flex-grow w-72 min-w-72"
+          >
             <div className="h-full pt-4 pb-10 pl-6 pr-10 border rounded-md bg-bgcard border-bline hover:shadow-lg transition-all duration-300">
               <DotMatrix rows={3} cols={18} />
               <div className="relative flex flex-col gap-2 pt-6">
@@ -362,7 +348,7 @@ const AboutMe = () => {
                 {work.description}
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </main>

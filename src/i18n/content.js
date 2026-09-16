@@ -143,6 +143,12 @@ export const projects = {
 };
 
 export const tech = {
+  intro: {
+    pre: { zh: "我的专长覆盖广泛的技术栈，能够交付", en: "My expertise spans a diverse range of technologies, enabling me to deliver " },
+    hi: { zh: "全面且前沿", en: "comprehensive and " },
+    mid: { zh: "的解决方案。", en: "solutions" },
+    hi2: { zh: "", en: " across various platforms." },
+  },
   heading: {
     pre: { zh: "我以", en: "I Build " },
     amazing: { zh: "惊艳", en: "amazing" },
@@ -291,7 +297,7 @@ export const footer = {
   projectsCard: { zh: "我的项目", en: "My Projects" },
   projectsHint: { zh: "看看项目", en: "Explore Projects" },
   madeWith: { zh: "用心构建", en: "Made with" },
-  watermark: { zh: "你好 世界", en: "hello world" },
+  watermark: { zh: "Kael Odin", en: "Kael Odin" },
 };
 
 export const social = {
