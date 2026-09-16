@@ -136,9 +136,9 @@ const Hero = () => {
   });
 
   return (
-    <><main className="min-h-[85vh] flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 py-8">
+    <><main className="relative min-h-[calc(100vh-80px)] w-screen flex flex-col items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 py-8 overflow-hidden">
 
-      <StaggerGroup className="flex flex-col items-center gap-1 max-w-6xl w-full" stagger={0.12} delay={0.1}>
+      <StaggerGroup mount className="flex flex-col items-center gap-1 max-w-6xl w-full z-10" stagger={0.12} delay={0.1}>
         <StaggerItem className="flex items-center gap-2 sm:gap-4">
           <div className="rounded-full w-11 h-11 lg:w-14 lg:h-14 overflow-hidden border border-bline">
             <img src="Avatar.png" alt="Kael Odin" className="w-full h-full object-cover" />
@@ -201,7 +201,7 @@ const Hero = () => {
           </TextAnimate>
         </StaggerItem>
       </StaggerGroup>
-      <StaggerGroup className="flex flex-col items-center gap-3 w-full" stagger={0.1} delay={0.65}>
+      <StaggerGroup mount className="flex flex-col items-center gap-3 w-full z-10" stagger={0.1} delay={0.65}>
         <StaggerItem>
           <p className='text-center text-lg sm:text-2xl text-primarytext max-w-4xl'>
             {t(hero.tagline.zh, hero.tagline.en).split(t(hero.tagWords.efficiency.zh, hero.tagWords.efficiency.en))[0]}
@@ -213,10 +213,11 @@ const Hero = () => {
             {t('。', '.')}
           </p>
         </StaggerItem>
-        <StaggerItem className="w-full overflow-hidden">
-          <CellGrid rows={10} cols={gridCols} cellSize={64} />
-        </StaggerItem>
       </StaggerGroup>
+
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <CellGrid rows={12} cols={gridCols} cellSize={64} />
+      </div>
 
     </main><Social /></>
 

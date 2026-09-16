@@ -13,12 +13,13 @@ export function TextAnimate({
 }) {
   const parts = by === "word" ? String(children).split(/(\s+)/) : Array.from(String(children));
   const Tag = motion[as] ?? motion.span;
+  // key on children: re-animates when language switches
   return (
     <Tag
+      key={String(children)}
       className={className}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once, margin: "-40px" }}
+      animate="show"
       variants={{ hidden: {}, show: { transition: { staggerChildren: 0.025, delayChildren: delay } } }}
       {...rest}
     >
@@ -39,13 +40,12 @@ export function TextAnimate({
 }
 
 // Scroll-triggered fade-up wrapper mirroring reference StaggerGroup/Item.
-export function StaggerGroup({ children, className = "", stagger = 0.08, delay = 0 }) {
+export function StaggerGroup({ children, className = "", stagger = 0.08, delay = 0, mount = false }) {
   return (
     <motion.div
       className={className}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-40px" }}
+      {...(mount ? { animate: "show" } : { whileInView: "show", viewport: { once: true, margin: "-40px" } })}
       variants={{ hidden: {}, show: { transition: { staggerChildren: stagger, delayChildren: delay } } }}
     >
       {children}

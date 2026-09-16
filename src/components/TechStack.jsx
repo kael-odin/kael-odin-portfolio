@@ -2,19 +2,23 @@ import { Cover } from './ui/Cover';
 import { useLang } from '../i18n/LanguageContext.jsx';
 import { tech } from '../i18n/content.js';
 
-const TechLogos = () => {
-  const colors = ["text-accentc", "text-bgreen", "text-accentv", "text-primarytext"];
-  return (
-    <div className="flex items-center gap-16 px-4">
-      {tech.items.map((name, i) => (
-        <div key={name} className="flex flex-col items-center gap-2">
-          <div className={`text-4xl ${colors[i % colors.length]} font-bold`}>{name}</div>
-          <div className={`h-1 w-12 rounded-full ${colors[i % colors.length].replace('text-', 'bg-')}`}></div>
-        </div>
-      ))}
-    </div>
-  );
-};
+// Reference-style tech rail: real icon badges (scraped SVGs) scrolling in
+// two mirrored marquees with gradient fade masks on the edges.
+const icons = [
+  'react', 'nextjs', 'typescript', 'javascript', 'tailwind', 'node', 'express',
+  'mongodb', 'psql', 'sql', 'html', 'css', 'git', 'java', 'python', 'aws', 'shadcn',
+];
+
+const TechBadges = () => (
+  <div className="flex items-center gap-6 px-3">
+    {icons.map((name) => (
+      <div key={name} className="flex flex-col items-center justify-center gap-2 h-20 w-20 rounded-xl border border-bline bg-bgcard p-2 hover:border-accentv/60 transition-colors">
+        <img src={`ref-assets/${name}.svg`} alt={name} className="h-10 w-10 object-contain" loading="lazy" />
+        <span className="text-[10px] uppercase tracking-wider text-sectext">{name}</span>
+      </div>
+    ))}
+  </div>
+);
 
 function TechStack() {
   const { t } = useLang();
@@ -25,17 +29,15 @@ function TechStack() {
         <Cover>{t(tech.heading.cover.zh, tech.heading.cover.en)}</Cover>
       </h1>
 
-      {/* Marquee container */}
-      <div className="relative flex overflow-x-hidden ">
-        {/* First marquee */}
+      <div className="relative flex overflow-x-hidden">
         <div className="animate-marquee whitespace-nowrap py-12">
-          <TechLogos />
+          <TechBadges />
         </div>
-
-        {/* Duplicated marquee for seamless loop */}
         <div className="absolute top-0 animate-marquee2 whitespace-nowrap py-12">
-          <TechLogos />
+          <TechBadges />
         </div>
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent" />
       </div>
     </div>
   );

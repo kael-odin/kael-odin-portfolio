@@ -37,7 +37,7 @@ function App() {
       </div>
       <NoiseOverlay />
       <ScrollProgress />
-      <SplashGate minTime={14000}>
+      <SplashGate minTime={9000}>
         <Navbar />
         <main className="flex-grow">
           <Routes>
