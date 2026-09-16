@@ -36,11 +36,11 @@ function CellGrid({ rows = 10, cols = 30, cellSize = 64, className = "" }) {
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       const dist = hot ? Math.hypot(hot.row - r, hot.col - c) : 99;
-      const glow = dist < 6 ? Math.max(0, 1 - dist / 6) : 0;
+      const glow = dist < 5 ? Math.max(0, 1 - dist / 5) : 0;
       cells.push(
         <div
           key={`${r}-${c}`}
-          className="cell relative border-[0.5px] opacity-40 transition-opacity duration-150 will-change-transform hover:opacity-80 shadow-[0px_0px_40px_1px_var(--cell-shadow-color)_inset]"
+          className="cell relative border-[0.5px] opacity-40 transition-opacity duration-150 will-change-transform shadow-[0px_0px_40px_1px_var(--cell-shadow-color)_inset]"
           style={{
             backgroundColor: "var(--cell-fill-color)",
             borderColor: "var(--cell-border-color)",
@@ -58,7 +58,7 @@ function CellGrid({ rows = 10, cols = 30, cellSize = 64, className = "" }) {
     <div
       ref={wrapRef}
       aria-hidden="true"
-      className={`relative z-[3] [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_75%)] ${className}`}
+      className={`relative z-[3] [mask-image:radial-gradient(ellipse_at_top,black_10%,transparent_70%)] ${className}`}
       style={{
         display: "grid",
         gridTemplateColumns: `repeat(${cols}, ${cellSize}px)`,

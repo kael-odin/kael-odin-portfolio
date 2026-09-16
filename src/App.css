@@ -24,3 +24,14 @@ html {
     transform-origin: 70% 70%;
     display: inline-block;
   }
+
+/* WHAT I DO card dot shimmer: a dot randomly brightens then fades back to #666 */
+@keyframes dot-glow {
+  0% { background-color: #666; box-shadow: 0 0 0 0 rgba(255, 255, 227, 0); }
+  35% { background-color: #ffffe3; box-shadow: 0 0 4px 1px rgba(255, 255, 227, 0.65); }
+  70% { background-color: #d9d9c9; box-shadow: 0 0 2px 0 rgba(255, 255, 227, 0.25); }
+  100% { background-color: #666; box-shadow: 0 0 0 0 rgba(255, 255, 227, 0); }
+}
+.dot-twinkle {
+  animation: dot-glow 2.6s ease-in-out infinite;
+}

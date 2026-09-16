@@ -67,7 +67,7 @@ export const hero = {
 
 export const intro = {
   blend: {
-    pre: { zh: "我融合", en: "My blend of" },
+    pre: { zh: "我融合", en: "My blend of " },
     design: { zh: "设计、", en: "design, " },
     code: { zh: "代码、", en: "coding, " },
     func: { zh: "功能", en: "functionality " },

@@ -349,7 +349,7 @@ const AboutMe = () => {
 
       <div className="flex flex-row flex-wrap w-11/12 gap-4 pt-3 opacity-0" ref={workRef}>
         {mywork.map((work, index) => (
-          <div key={index} className="flex-grow w-64 min-w-64">
+          <div key={index} className="flex-grow w-72 min-w-72">
             <div className="h-full pt-4 pb-10 pl-6 pr-10 border rounded-md bg-bgcard border-bline hover:shadow-lg transition-all duration-300">
               <DotMatrix rows={3} cols={18} />
               <div className="relative flex flex-col gap-2 pt-6">
@@ -371,13 +371,25 @@ const AboutMe = () => {
 };
 
 // Reference-style dot-matrix header for WHAT I DO cards (18x3 one-dot grid).
+// Twinkling dot matrix: most dots sit at #666, a few randomly brighten toward
+// white then fade back — the reference card's shimmer effect.
 function DotMatrix({ rows = 3, cols = 18 }) {
   const dots = [];
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
+      // ~7% of dots twinkle with a randomized delay/duration.
+      const twinkle = Math.random() < 0.07;
+      const delay = (Math.random() * 4).toFixed(2);
+      const dur = (1.8 + Math.random() * 2.4).toFixed(2);
       dots.push(
         <div key={`${r}-${c}`} className="relative flex items-center justify-center">
-          <div className="bg-[#666] h-[1px] w-[1px] rounded-full relative z-20" />
+          <div
+            className="h-[1px] w-[1px] rounded-full relative z-20 dot-twinkle"
+            style={{
+              backgroundColor: "#666",
+              ...(twinkle ? { animationDelay: `${delay}s`, animationDuration: `${dur}s` } : {}),
+            }}
+          />
         </div>
       );
     }

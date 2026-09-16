@@ -39,7 +39,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="flex items-center justify-between mx-1 sm:mx-2 md:mx-3 lg:mx-4 h-14 sm:h-16 lg:h-20">
+      <nav className="flex items-center justify-between mx-1 sm:mx-2 md:mx-3 lg:mx-4 h-14 sm:h-16 lg:h-20 max-w-13xl lg:m-auto px-0 lg:px-2">
         <div>
           <div className="flex items-center gap-2 px-3 py-2 border border-bline rounded-3xl">
             <div className="w-3 h-3 rounded-3xl bg-primarytext sm:w-4 sm:h-4" />
